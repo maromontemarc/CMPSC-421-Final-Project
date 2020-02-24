@@ -2,10 +2,10 @@ package psu.edu.restaurant;
 
 import java.util.Vector;
 
-public class Customer
+public class  Customer
 {
     String name, address, ccn;
-    Vector<String> cart;
+    Vector<MenuItem> cart = new Vector<>();
 
     public String getName() {
         return name;
@@ -31,11 +31,11 @@ public class Customer
         this.ccn = ccn;
     }
 
-    public Vector<String> getCart() {
+    public Vector<MenuItem> getCart() {
         return cart;
     }
 
-    public void setCart(String item) {
-        this.cart.add(item);
+    public void setCart(MenuItem item) {
+        this.cart.addElement(item);
     }
 }

@@ -11,8 +11,8 @@ import static psu.edu.restaurant.RestaurantController.menuH;
 @RestController
 public class CustomerController
 {
-    private HashMap<Integer, Customer> custH = new HashMap<>();
-    private HashMap<Integer, CustomerDTO> custDTOH = new HashMap<>();
+    static public HashMap<Integer, Customer> custH = new HashMap<>();
+    static public HashMap<Integer, CustomerDTO> custDTOH = new HashMap<>();
     private int custID = 0;
 
     @GetMapping("/cust/get")
@@ -57,21 +57,5 @@ public class CustomerController
         return cust;
     }
 
-    @PutMapping("/cust/cart/add")
-    public Vector<String> addToCart(@RequestParam(name = "item") int item, @RequestParam(name = "id") int id)
-    {
-        custH.get(id).setCart(menuH.get(item));
-        custDTOH.get(id).setCart(custH.get(id).getCart());
 
-        return custH.get(id).getCart();
-    }
-
-    @DeleteMapping("/cust/cart/delete")
-    public Vector<String> removeFromCart(@RequestParam(name = "item") int item, @RequestParam(name = "id") int id)
-    {
-        custH.get(id).getCart().remove(item);
-        custDTOH.get(id).getCart().remove(item);
-
-        return custH.get(id).getCart();
-    }
 }
