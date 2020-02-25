@@ -31,8 +31,9 @@ public class CustomerController
     public CustomerDTO createCustomer(@RequestBody Customer cust)
     {
         custH.put(custID, cust);
-        custID++;
         CustomerDTO custDTO = new CustomerDTO(cust);
+        custDTOH.put(custID, custDTO);
+        custID++;
 
         return custDTO;
     }
