@@ -33,7 +33,14 @@ public class RestaurantController
     @GetMapping("/menubyid")
     public MenuItem getMenuById(@RequestParam(name = "id") int id)
     {
-        return menuH.get(id);
+        if(menuH.containsKey(id))
+        {
+            return menuH.get(id);
+        }
+        else
+        {
+            return null;
+        }
     }
 
     @PostMapping("/menu/add")

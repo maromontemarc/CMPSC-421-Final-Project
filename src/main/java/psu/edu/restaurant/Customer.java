@@ -7,6 +7,13 @@ public class  Customer
     String name, address, ccn;
     Vector<MenuItem> cart = new Vector<>();
 
+    public Customer(String name, String address, String ccn)
+    {
+        this.name = name;
+        this.address = address;
+        this.ccn = ccn;
+    }
+
     public String getName() {
         return name;
     }
