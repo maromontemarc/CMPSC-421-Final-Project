@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import javax.naming.AuthenticationException;
 
 @Configuration
-public class RestuarantSecurityConfig extends WebSecurityConfigurerAdapter{
+public class RestaurantSecurityConfig extends WebSecurityConfigurerAdapter{
 
 
     @Override
@@ -22,7 +22,7 @@ public class RestuarantSecurityConfig extends WebSecurityConfigurerAdapter{
                 .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.DELETE, "/cust/delete").hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/cust/update").hasRole("ADMIN")
+
                 .antMatchers(HttpMethod.GET,"/cust/get").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/cust/list").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/menu/delete").hasRole("ADMIN")
