@@ -31,6 +31,26 @@ public class CartController
         }
     }
 
+    @PutMapping("/cart/clear")
+    public Vector<MenuItem> clearCart(@RequestParam(name = "id") int id)
+    {
+        if(custH.containsKey(id) && !custH.get(id).cart.isEmpty())
+        {
+            custH.get(id).cart.clear();
+            return custH.get(id).cart;
+        }
+        else if(custH.get(id).cart.isEmpty())
+        {
+            System.out.println("Cart is already empty.");
+            return custH.get(id).cart;
+        }
+        else
+        {
+            System.out.println("Clear Error");
+            return null;
+        }
+    }
+
     @DeleteMapping("/cart/delete")
     public Vector<MenuItem> removeFromCart(@RequestParam(name = "item") int item, @RequestParam(name = "id") int id)
     {
