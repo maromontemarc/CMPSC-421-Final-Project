@@ -21,7 +21,8 @@ public class RestuarantSecurityConfig extends WebSecurityConfigurerAdapter{
         http.httpBasic()
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET).permitAll()
+                .antMatchers(HttpMethod.GET,"/cust/get").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/custList").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/menu/delete").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT, "/menu/update").hasRole("ADMIN")
 
