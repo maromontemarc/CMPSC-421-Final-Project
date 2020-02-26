@@ -76,22 +76,34 @@ public class CustomerController
     @DeleteMapping("/cust/delete")
     public int deleteCustomer(@RequestParam(name = "id") int id )
     {
-        custH.remove(id);
-        custDTOH.remove(id);
-        return id;
+        if(custH.containsKey(id) && custDTOH.containsKey(id))
+        {
+            custH.remove(id);
+            custDTOH.remove(id);
+            return id;
+        }
+        else
+        {
+            return -1;
+        }
     }
 
     @PutMapping("/cust/update")
     public Customer updateCustomer(@RequestParam(name = "id") int id, @RequestBody Customer cust)
     {
-        custH.remove(id);
-        custDTOH.remove(id);
-        custH.put(id, cust);
-        CustomerDTO custDTO = new CustomerDTO(cust);
-        custDTOH.put(id, custDTO);
+        if(custH.containsKey(id) && custDTOH.containsKey(id))
+        {
+            custH.remove(id);
+            custDTOH.remove(id);
+            custH.put(id, cust);
+            CustomerDTO custDTO = new CustomerDTO(cust);
+            custDTOH.put(id, custDTO);
 
-        return cust;
+            return cust;
+        }
+        else
+        {
+            return null;
+        }
     }
-
-
 }

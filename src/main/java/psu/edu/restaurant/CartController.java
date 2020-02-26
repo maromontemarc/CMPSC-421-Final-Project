@@ -17,18 +17,31 @@ public class CartController
     @PutMapping("/cart/add")
     public Vector<MenuItem> addToCart(@RequestParam(name = "item") int item, @RequestParam(name = "id") int id)
     {
-        custH.get(id).setCart(menuH.get(item));
-        custDTOH.get(id).setCart(custH.get(id).getCart());
+        if(custH.containsKey(id) && menuH.containsKey(item))
+        {
+            custH.get(id).setCart(menuH.get(item));
+            custDTOH.get(id).setCart(custH.get(id).getCart());
 
-        return custH.get(id).getCart();
+            return custH.get(id).getCart();
+        }
+        else
+        {
+            return null;
+        }
     }
 
     @DeleteMapping("/cart/delete")
     public Vector<MenuItem> removeFromCart(@RequestParam(name = "item") int item, @RequestParam(name = "id") int id)
     {
-        custH.get(id).getCart().remove(item);
-        custDTOH.get(id).getCart().remove(item);
+        if(custH.containsKey(id) && menuH.containsKey(item)) {
+            custH.get(id).getCart().remove(item);
+            custDTOH.get(id).getCart().remove(item);
 
-        return custH.get(id).getCart();
+            return custH.get(id).getCart();
+        }
+        else
+        {
+            return null;
+        }
     }
 }

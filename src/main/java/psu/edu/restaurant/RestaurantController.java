@@ -53,15 +53,29 @@ public class RestaurantController
     @DeleteMapping("/menu/delete")
     public Collection<MenuItem> deleteMenu(@RequestParam(name = "id") int id)
     {
-        menuH.remove(id);
-        return menuH.values();
+        if( menuH.containsKey(id))
+        {
+            menuH.remove(id);
+            return menuH.values();
+        }
+        else
+        {
+            return null;
+        }
     }
 
     @PutMapping("/menu/update")
     public Collection<MenuItem> updateMenu(@RequestParam(name = "id") int id, @RequestBody MenuItem item)
     {
-        menuH.remove(id);
-        menuH.put(id, item);
-        return menuH.values();
+        if(menuH.containsKey(id))
+        {
+            menuH.remove(id);
+            menuH.put(id, item);
+            return menuH.values();
+        }
+        else
+        {
+            return null;
+        }
     }
 }
