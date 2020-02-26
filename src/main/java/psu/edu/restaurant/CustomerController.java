@@ -11,17 +11,52 @@ import static psu.edu.restaurant.RestaurantController.menuH;
 @RestController
 public class CustomerController
 {
-    private HashMap<Integer, Customer> custH = new HashMap<>();
-    private HashMap<Integer, CustomerDTO> custDTOH = new HashMap<>();
+    static public HashMap<Integer, Customer> custH = new HashMap<>();
+    static public HashMap<Integer, CustomerDTO> custDTOH = new HashMap<>();
     private int custID = 0;
+
+    public CustomerController()
+    {
+        Customer Marc = new Customer("Marc", "123 Home Road", "1234");
+        Customer Tom = new Customer("Tom", "456 House Street", "5678");
+        Customer Dave = new Customer("Dave", "789 Road Road", "9101");
+        Customer Marshall = new Customer("Marshall", "119 Barn Street", "2312");
+
+        CustomerDTO MarcDTO = new CustomerDTO(Marc);
+        CustomerDTO TomDTO = new CustomerDTO(Tom);
+        CustomerDTO DaveDTO = new CustomerDTO(Dave);
+        CustomerDTO MarshallDTO = new CustomerDTO(Marshall);
+
+        custH.put(custID, Marc);
+        custDTOH.put(custID, MarcDTO);
+        custID++;
+
+        custH.put(custID, Tom);
+        custDTOH.put(custID, TomDTO);
+        custID++;
+
+        custH.put(custID, Dave);
+        custDTOH.put(custID, DaveDTO);
+        custID++;
+
+        custH.put(custID, Marshall);
+        custDTOH.put(custID, MarshallDTO);
+        custID++;
+    }
 
     @GetMapping("/cust/get")
     public Customer getCustomer(@RequestParam(name = "id") int id)
     {
-        return custH.get(id);
+        if(custH.containsKey(id)) {
+            return custH.get(id);
+        }
+        else
+        {
+            return null;
+        }
     }
 
-    @GetMapping("/custList")
+    @GetMapping("/cust/list")
     public Collection<Customer> getCustomerList()
     {
         return custH.values();
@@ -31,8 +66,9 @@ public class CustomerController
     public CustomerDTO createCustomer(@RequestBody Customer cust)
     {
         custH.put(custID, cust);
-        custID++;
         CustomerDTO custDTO = new CustomerDTO(cust);
+        custDTOH.put(custID, custDTO);
+        custID++;
 
         return custDTO;
     }
@@ -40,38 +76,34 @@ public class CustomerController
     @DeleteMapping("/cust/delete")
     public int deleteCustomer(@RequestParam(name = "id") int id )
     {
-        custH.remove(id);
-        custDTOH.remove(id);
-        return id;
+        if(custH.containsKey(id) && custDTOH.containsKey(id))
+        {
+            custH.remove(id);
+            custDTOH.remove(id);
+            return id;
+        }
+        else
+        {
+            return -1;
+        }
     }
 
     @PutMapping("/cust/update")
     public Customer updateCustomer(@RequestParam(name = "id") int id, @RequestBody Customer cust)
     {
-        custH.remove(id);
-        custDTOH.remove(id);
-        custH.put(id, cust);
-        CustomerDTO custDTO = new CustomerDTO(cust);
-        custDTOH.put(id, custDTO);
+        if(custH.containsKey(id) && custDTOH.containsKey(id))
+        {
+            custH.remove(id);
+            custDTOH.remove(id);
+            custH.put(id, cust);
+            CustomerDTO custDTO = new CustomerDTO(cust);
+            custDTOH.put(id, custDTO);
 
-        return cust;
-    }
-
-    @PutMapping("/cust/cart/add")
-    public Vector<String> addToCart(@RequestParam(name = "item") int item, @RequestParam(name = "id") int id)
-    {
-        custH.get(id).setCart(menuH.get(item));
-        custDTOH.get(id).setCart(custH.get(id).getCart());
-
-        return custH.get(id).getCart();
-    }
-
-    @DeleteMapping("/cust/cart/delete")
-    public Vector<String> removeFromCart(@RequestParam(name = "item") int item, @RequestParam(name = "id") int id)
-    {
-        custH.get(id).getCart().remove(item);
-        custDTOH.get(id).getCart().remove(item);
-
-        return custH.get(id).getCart();
+            return cust;
+        }
+        else
+        {
+            return null;
+        }
     }
 }

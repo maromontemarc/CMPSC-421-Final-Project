@@ -5,7 +5,7 @@ import java.util.Vector;
 public class CustomerDTO
 {
     String name;
-    Vector<String> cart;
+    Vector<MenuItem> cart;
 
     public CustomerDTO(Customer cust)
     {
@@ -21,11 +21,11 @@ public class CustomerDTO
         this.name = name;
     }
 
-    public Vector<String> getCart() {
+    public Vector<MenuItem> getCart() {
         return cart;
     }
 
-    public void setCart(Vector<String> cart) {
+    public void setCart(Vector<MenuItem> cart) {
         this.cart = cart;
     }
 }

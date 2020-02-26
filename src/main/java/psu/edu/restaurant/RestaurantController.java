@@ -8,48 +8,74 @@ import java.util.HashMap;
 @RestController
 public class RestaurantController
 {
-    static public HashMap<Integer, String> menuH = new HashMap<>();
+    static public HashMap<Integer, MenuItem> menuH = new HashMap<>();
     private int menuID = 0;
     public RestaurantController()
     {
-        menuH.put(menuID++, "Steak: $12");
-        menuH.put(menuID++, "Burger: $8");
-        menuH.put(menuID++, "Cheeseburger: $9");
-        menuH.put(menuID++, "Pizza: $10");
-        menuH.put(menuID++, "Grilled Chicken: $9");
+        MenuItem steak = new MenuItem("Steak", 12);
+        MenuItem burger = new MenuItem("Burger", 8);
+        MenuItem cheeseBurger = new MenuItem("Cheeseburger", 9);
+        MenuItem pizza = new MenuItem("Pizza", 10);
+        MenuItem grilledChicken = new MenuItem("Grilled Chicken", 9);
+        menuH.put(menuID++, steak);
+        menuH.put(menuID++, burger);
+        menuH.put(menuID++, cheeseBurger);
+        menuH.put(menuID++, pizza);
+        menuH.put(menuID++, grilledChicken);
     }
 
     @GetMapping("/menu")
-    public Collection<String> getMenu()
+    public Collection<MenuItem> getMenu()
     {
         return menuH.values();
     }
 
     @GetMapping("/menubyid")
-    public String getMenuById(@RequestParam(name = "id") int id)
+    public MenuItem getMenuById(@RequestParam(name = "id") int id)
     {
-        return menuH.get(id);
+        if(menuH.containsKey(id))
+        {
+            return menuH.get(id);
+        }
+        else
+        {
+            return null;
+        }
     }
 
     @PostMapping("/menu/add")
-    public String addMenu(@RequestBody String item)
+    public Collection<MenuItem> addMenu(@RequestBody MenuItem item)
     {
         menuH.put(menuID++, item);
-        return item;
+        return menuH.values();
     }
 
     @DeleteMapping("/menu/delete")
-    public int deleteMenu(@RequestParam(name = "id") int id)
+    public Collection<MenuItem> deleteMenu(@RequestParam(name = "id") int id)
     {
-        menuH.remove(id);
-        return id;
+        if( menuH.containsKey(id))
+        {
+            menuH.remove(id);
+            return menuH.values();
+        }
+        else
+        {
+            return null;
+        }
     }
 
     @PutMapping("/menu/update")
-    public String updateMenu(@RequestParam(name = "id") int id, @RequestBody String item)
+    public Collection<MenuItem> updateMenu(@RequestParam(name = "id") int id, @RequestBody MenuItem item)
     {
-        menuH.remove(id);
-        menuH.put(id, item);
-        return item;
+        if(menuH.containsKey(id))
+        {
+            menuH.remove(id);
+            menuH.put(id, item);
+            return menuH.values();
+        }
+        else
+        {
+            return null;
+        }
     }
 }
