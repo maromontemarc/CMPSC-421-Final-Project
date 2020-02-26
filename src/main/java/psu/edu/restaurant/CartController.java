@@ -26,6 +26,7 @@ public class CartController
         }
         else
         {
+            System.out.println("Add Error");
             return null;
         }
     }
@@ -41,7 +42,40 @@ public class CartController
         }
         else
         {
+            System.out.println("Delete Error");
             return null;
+        }
+    }
+
+    @PutMapping("/cart/checkout")
+    public double checkOut(@RequestParam(name = "id") int id, @RequestParam(name = "method") String method)
+    {
+        if(custH.containsKey(id) && !custH.get(id).cart.isEmpty() &&
+                (method.equalsIgnoreCase("Pickup") || method.equalsIgnoreCase("Delivery")))
+        {
+            double total = 0;
+
+            if(method.equalsIgnoreCase("Delivery") && !custH.get(id).ccn.isEmpty())
+            {
+                total += 2;
+            }
+            else {
+                System.out.println("Ccn Error");
+                return -1;
+            }
+
+            for(int i = 0; i < custH.get(id).cart.size(); i++)
+            {
+                total += custH.get(id).cart.elementAt(i).price;
+            }
+
+            custH.get(id).cart.clear();
+            return total;
+        }
+        else
+        {
+            System.out.println("Checkout Error");
+            return -1;
         }
     }
 }
