@@ -57,34 +57,34 @@ public class CustomerController
     }
 
     @GetMapping("/cust/list")
-    public Collection<Customer> getCustomerList()
+    public Collection<CustomerDTO> getCustomerList()
     {
-        return custH.values();
+        return custDTOH.values();
     }
 
     @PostMapping("/cust/create")
-    public CustomerDTO createCustomer(@RequestBody Customer cust)
+    public Customer createCustomer(@RequestBody Customer cust)
     {
         custH.put(custID, cust);
         CustomerDTO custDTO = new CustomerDTO(cust);
         custDTOH.put(custID, custDTO);
         custID++;
 
-        return custDTO;
+        return cust;
     }
 
     @DeleteMapping("/cust/delete")
-    public int deleteCustomer(@RequestParam(name = "id") int id )
+    public Collection<Customer> deleteCustomer(@RequestParam(name = "id") int id )
     {
         if(custH.containsKey(id) && custDTOH.containsKey(id))
         {
             custH.remove(id);
             custDTOH.remove(id);
-            return id;
+            return custH.values();
         }
         else
         {
-            return -1;
+            return null;
         }
     }
 
