@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static psu.edu.restaurant.CouponController.coupons;
 import static psu.edu.restaurant.CustomerController.custDTOH;
 import static psu.edu.restaurant.CustomerController.custH;
 import static psu.edu.restaurant.RestaurantController.menuH;
@@ -261,6 +262,14 @@ class RestaurantApplicationTests {
         assertEquals(dif,cc.getCouponById(1));
     }
     @Test
+    void testUpdateCouponHappy2()
+    {
+        CouponController cc = new CouponController();
+        Coupon dif = new Coupon("50% off total",.8);
+        cc.updateCoupon(2,dif);
+        assertEquals(dif,cc.getCouponById(2));
+    }
+    @Test
     void testUpdateCouponUnHappy()
     {
         CouponController cc = new CouponController();
@@ -276,6 +285,13 @@ class RestaurantApplicationTests {
         cc.deleteCoupon(1);
         assertEquals(null,cc.getCouponById(1));
     }
+    @Test
+    void testDeleteCouponHappy2()
+    {
+        CouponController cc = new CouponController();
+        cc.deleteCoupon(2);
+        assertEquals(null,cc.getCouponById(2));
+    }
 
     @Test
     void testDeleteCouponUnHappy()
@@ -283,6 +299,66 @@ class RestaurantApplicationTests {
         CouponController cc = new CouponController();
         cc.deleteCoupon(1);
         assertEquals(null,cc.getCouponById(1));
+    }
+
+    @Test
+    void testGetCouponByIdHappy()
+    {
+        CouponController cc = new CouponController();
+        assertNotEquals(null,cc.getCouponById(1));
+    }
+    @Test
+    void testGetCouponByIdHappy2()
+    {
+        CouponController cc = new CouponController();
+        assertNotEquals(null,cc.getCouponById(1));
+    }
+    @Test
+    void testGetCouponByIdUnHappy()
+    {
+        CouponController cc = new CouponController();
+        assertEquals(null,cc.getCouponById(30));
+    }
+
+    @Test
+    void testCouponAddHappy()
+    {
+        CouponController cc = new CouponController();
+        Coupon r = new Coupon("20%", .2);
+        assertNotEquals(null,cc.addCoupon(r));
+    }
+    @Test
+    void testCouponAddHappy2()
+    {
+        CouponController cc = new CouponController();
+        Coupon d = new Coupon("70%", .7);
+        assertNotEquals(null,cc.addCoupon(d));
+    }
+    @Test
+    void testCouponAddUnHappy()
+    {
+        CouponController cc = new CouponController();
+        Coupon r = coupons.get(1);
+
+        assertEquals("Coupon already exists",cc.addCoupon(r));
+    }
+
+    @Test
+    void testCouponList()
+    {
+        CouponController cc = new CouponController();
+        Collection<Coupon> coupon = cc.getCoupons();
+        for(int i = 0; i < coupons.size(); i++)
+        {
+            if(!coupon.contains(coupons.get(i)))
+            {
+                System.out.println("Error: doesn't contain coupon " + coupons.get(i).name );
+            }
+            else
+            {
+                System.out.println("Contains: " + coupons.get(i).name );
+            }
+        }
     }
 
     // CartController tests
