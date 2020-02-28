@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Vector;
 
+import static psu.edu.restaurant.CouponController.coupons;
 import static psu.edu.restaurant.CustomerController.custDTOH;
 import static psu.edu.restaurant.CustomerController.custH;
 import static psu.edu.restaurant.RestaurantController.menuH;
@@ -68,7 +69,7 @@ public class CartController
     }
 
     @PutMapping("/cart/checkout")
-    public double checkOut(@RequestParam(name = "id") int id, @RequestParam(name = "method") String method)
+    public double checkOut(@RequestParam(name = "id") int id, @RequestParam(name = "method") String method,@RequestParam(name = "cId")int cId)
     {
         if(custH.containsKey(id) && !custH.get(id).cart.isEmpty() &&
                 (method.equalsIgnoreCase("Pickup") || method.equalsIgnoreCase("Delivery")))
@@ -88,6 +89,10 @@ public class CartController
             {
                 total += custH.get(id).cart.elementAt(i).price;
             }
+            if(coupons.get(cId) != null) {
+                total = total* coupons.get(cId).getDiscount();
+            }
+
 
             custH.get(id).cart.clear();
             return total;
