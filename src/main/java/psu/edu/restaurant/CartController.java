@@ -55,8 +55,8 @@ public class CartController
     public Vector<MenuItem> removeFromCart(@RequestParam(name = "item") int item, @RequestParam(name = "id") int id)
     {
         if(custH.containsKey(id) && menuH.containsKey(item)) {
-            custH.get(id).getCart().remove(item);
-            custDTOH.get(id).getCart().remove(item);
+            custH.get(id).getCart().remove(menuH.get(item));
+            custDTOH.get(id).getCart().remove(menuH.get(item));
 
             return custH.get(id).getCart();
         }

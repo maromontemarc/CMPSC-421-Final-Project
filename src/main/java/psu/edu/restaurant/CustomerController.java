@@ -63,14 +63,19 @@ public class CustomerController
     }
 
     @PostMapping("/cust/create")
-    public Customer createCustomer(@RequestBody Customer cust)
+    public String createCustomer(@RequestBody Customer cust)
     {
-        custH.put(custID, cust);
-        CustomerDTO custDTO = new CustomerDTO(cust);
-        custDTOH.put(custID, custDTO);
-        custID++;
+        if(custH.containsValue(cust)){
+            return "This Customer already exists";
+    }
+        else {
+            custH.put(custID, cust);
+            CustomerDTO custDTO = new CustomerDTO(cust);
+            custDTOH.put(custID, custDTO);
+            custID++;
 
-        return cust;
+            return cust.getName();
+        }
     }
 
     @DeleteMapping("/cust/delete")
