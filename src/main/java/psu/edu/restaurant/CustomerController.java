@@ -17,10 +17,10 @@ public class CustomerController
 
     public CustomerController()
     {
-        Customer Marc = new Customer("Marc", "123 Home Road", "1234");
-        Customer Tom = new Customer("Tom", "456 House Street", "5678");
-        Customer Dave = new Customer("Dave", "789 Road Road", "9101");
-        Customer Marshall = new Customer("Marshall", "119 Barn Street", "2312");
+        Customer Marc = new Customer("Marc", "648 Milltown Road", "1234");
+        Customer Tom = new Customer("Tom", "164 Crossing Ridge Trail", "5678");
+        Customer Dave = new Customer("Dave", "4323 Stanley Avenue", "9101");
+        Customer Marshall = new Customer("Marshall", "255 Ruth Street", "2312");
 
         CustomerDTO MarcDTO = new CustomerDTO(Marc);
         CustomerDTO TomDTO = new CustomerDTO(Tom);
@@ -63,14 +63,19 @@ public class CustomerController
     }
 
     @PostMapping("/cust/create")
-    public Customer createCustomer(@RequestBody Customer cust)
+    public String createCustomer(@RequestBody Customer cust)
     {
-        custH.put(custID, cust);
-        CustomerDTO custDTO = new CustomerDTO(cust);
-        custDTOH.put(custID, custDTO);
-        custID++;
+        if(custH.containsValue(cust)){
+            return "This Customer already exists";
+    }
+        else {
+            custH.put(custID, cust);
+            CustomerDTO custDTO = new CustomerDTO(cust);
+            custDTOH.put(custID, custDTO);
+            custID++;
 
-        return cust;
+            return cust.getName();
+        }
     }
 
     @DeleteMapping("/cust/delete")
