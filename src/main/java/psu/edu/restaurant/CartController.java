@@ -40,7 +40,7 @@ public class CartController
             custH.get(id).cart.clear();
             return custH.get(id).cart;
         }
-        else if(custH.get(id).cart.isEmpty())
+        else if(custH.containsKey(id) && custH.get(id).cart.isEmpty())
         {
             System.out.println("Cart is already empty.");
             return custH.get(id).cart;
@@ -69,7 +69,7 @@ public class CartController
     }
 
     @PutMapping("/cart/checkout")
-    public double checkOut(@RequestParam(name = "id") int id, @RequestParam(name = "method") String method,@RequestParam(name = "cId")int cId)
+    public double checkOut(@RequestParam(name = "id") int id, @RequestParam(name = "method") String method, @RequestParam(name = "cId") int cId)
     {
         if(custH.containsKey(id) && !custH.get(id).cart.isEmpty() &&
                 (method.equalsIgnoreCase("Pickup") || method.equalsIgnoreCase("Delivery")))
@@ -80,7 +80,7 @@ public class CartController
             {
                 total += 2;
             }
-            else {
+            else if(method.equalsIgnoreCase("Delivery")) {
                 System.out.println("Ccn Error");
                 return -1;
             }
@@ -90,7 +90,7 @@ public class CartController
                 total += custH.get(id).cart.elementAt(i).price;
             }
             if(coupons.get(cId) != null) {
-                total = total* coupons.get(cId).getDiscount();
+                total = total - (total* coupons.get(cId).getDiscount());
             }
 
 

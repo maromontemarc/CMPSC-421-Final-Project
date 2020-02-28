@@ -88,7 +88,13 @@ class RestaurantApplicationTests {
         Customer cust = cc.getCustomer(0);
         assertEquals(cust.getName(), "Marc");
     }
-
+    @Test
+    void testGetCustHappy2()
+    {
+        CustomerController cc = new CustomerController();
+        Customer cust = cc.getCustomer(1);
+        assertEquals(cust.getName(), "Tom");
+    }
     @Test
     void testGetCustUnhappy()
     {
@@ -123,7 +129,22 @@ class RestaurantApplicationTests {
         cc.updateCustomer(1,John );
         assertEquals(John,cc.getCustomer(1));
     }
-
+    @Test
+    void testUpdateCustomerHappy2()
+    {
+        CustomerController cc = new CustomerController();
+        Customer John = new Customer("Jeff","1533 penn ave","544-2234-12231");
+        cc.updateCustomer(2,John );
+        assertEquals(John,cc.getCustomer(2));
+    }
+    @Test
+    void testUpdateCustomerUnhappy()
+    {
+        CustomerController cc = new CustomerController();
+        Customer Jeff = new Customer("Jeff","1533 penn ave","544-2234-12231");
+        cc.updateCustomer(10,Jeff );
+        Assertions.assertNull(cc.updateCustomer(10,Jeff ));
+    }
 
     @Test
     void testDeleteCustomerHappy()
@@ -131,6 +152,14 @@ class RestaurantApplicationTests {
         CustomerController cc = new CustomerController();
         cc.deleteCustomer(1);
         assertEquals(null,cc.getCustomer(1));
+    }
+
+    @Test
+    void testDeleteCustomerHappy2()
+    {
+        CustomerController cc = new CustomerController();
+        cc.deleteCustomer(0);
+        assertEquals(null,cc.getCustomer(0));
     }
 
     @Test
@@ -148,6 +177,15 @@ class RestaurantApplicationTests {
 
 
         assertEquals(John.name, cc.createCustomer(John));
+    }
+    @Test
+    void testCreateCustomerHappy2()
+    {
+        CustomerController cc = new CustomerController();
+        Customer Jeff = new Customer("Jeff","1533 penn ave","544-2234-12231");
+
+
+        assertEquals(Jeff.name, cc.createCustomer(Jeff));
     }
     @Test
     void testCreateCustomerUnhappy()
@@ -199,45 +237,103 @@ class RestaurantApplicationTests {
     void testAddToCartHappy()
     {
         CartController cc = new CartController();
-        RestaurantController rc = new RestaurantController();
-        CustomerController cb = new CustomerController();
-
-
 
         assertNotEquals(null,  cc.addToCart(1,1));
+    }
+
+    @Test
+    void testAddToCartHappy2()
+    {
+        CartController cc = new CartController();
+
+        assertNotEquals(null,  cc.addToCart(2,0));
     }
     @Test
     void testAddToCartUnHappy()
     {
         CartController cc = new CartController();
-        RestaurantController rc = new RestaurantController();
-        CustomerController cb = new CustomerController();
-
-
 
         assertEquals(null,  cc.addToCart(10,1));
     }
     @Test
+    void testClearCartHappy()
+    {
+        CartController cc = new CartController();
+        CustomerController cb = new CustomerController();
+        cc.addToCart(0, 0);
+        cc.clearCart(0);
+
+        Assertions.assertEquals(cb.getCustomer(1).cart, cb.getCustomer(0).cart);
+    }
+    @Test
+    void testClearCartHappy2()
+    {
+        CartController cc = new CartController();
+        CustomerController cb = new CustomerController();
+        cc.addToCart(1, 1);
+        cc.clearCart(1);
+
+        Assertions.assertEquals(cb.getCustomer(0).cart, cb.getCustomer(1).cart);
+    }
+    @Test
+    void testClearCartUnhappy()
+    {
+        CartController cc = new CartController();
+        Assertions.assertNull(cc.clearCart(10));
+    }
+
+    @Test
     void testDeleteCartHappy()
     {
         CartController cc = new CartController();
-        RestaurantController rc = new RestaurantController();
-        CustomerController cb = new CustomerController();
         cc.addToCart(1,1);
         cc.addToCart(2,1);
 
         assertNotEquals(null,  cc.removeFromCart(2,1));
     }
     @Test
+    void testDeleteCartHappy2()
+    {
+        CartController cc = new CartController();
+        cc.addToCart(0,0);
+        cc.addToCart(1,0);
+
+        assertNotEquals(null,  cc.removeFromCart(1,0));
+    }
+
+    @Test
     void testDeleteCartUnHappy()
     {
         CartController cc = new CartController();
-        RestaurantController rc = new RestaurantController();
-        CustomerController cb = new CustomerController();
-
 
         assertEquals(null,  cc.removeFromCart(30,30));
     }
 
-
+    @Test
+    void testCheckOutHappy()
+    {
+        CartController cc = new CartController();
+        CustomerController customerController = new CustomerController();
+        RestaurantController restaurantController = new RestaurantController();
+        cc.addToCart(0, 0);
+        Assertions.assertEquals(12, cc.checkOut(0, "Pickup", -1));
+    }
+    @Test
+    void testCheckOutHappy2()
+    {
+        CartController cc = new CartController();
+        CustomerController customerController = new CustomerController();
+        RestaurantController restaurantController = new RestaurantController();
+        cc.addToCart(0, 0);
+        Assertions.assertEquals(14, cc.checkOut(0, "Delivery", -1));
+    }
+    @Test
+    void testCheckOutUnhappy()
+    {
+        CartController cc = new CartController();
+        CustomerController customerController = new CustomerController();
+        RestaurantController restaurantController = new RestaurantController();
+        cc.addToCart(0, 0);
+        Assertions.assertEquals(-1, cc.checkOut(-1, "Delivery", -1));
+    }
 }
