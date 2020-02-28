@@ -92,14 +92,45 @@ class RestaurantApplicationTests {
         rc.deleteMenu(1);
         assertEquals(null,rc.getMenuById(1));
     }
+    @Test
+    void testDeleteMenuItemHappy2()
+    {
+        RestaurantController rc = new RestaurantController();
+        rc.deleteMenu(2);
+        assertEquals(null,rc.getMenuById(2));
+    }
+    @Test
+    void testDeleteMenuItemUnhappy()
+    {
+        RestaurantController rc = new RestaurantController();
+        rc.deleteMenu(30);
+        assertEquals(null,  rc.deleteMenu(30));
+    }
 
     @Test
-    void testUpdateMenuItem()
+    void testUpdateMenuItemH()
     {
         RestaurantController rc = new RestaurantController();
         MenuItem Pop = new MenuItem("Pop",4.15 );
         rc.updateMenu(1,Pop);
         assertEquals(Pop,rc.getMenuById(1));
+    }
+    @Test
+    void testUpdateMenuItemHappy2()
+    {
+        RestaurantController rc = new RestaurantController();
+        MenuItem CokeA = new MenuItem("Coke A",2.5 );
+        rc.updateMenu(2,CokeA);
+        assertEquals(CokeA,rc.getMenuById(2));
+    }
+
+    @Test
+    void testUpdateMenuItemUnhappy()
+    {
+        RestaurantController rc = new RestaurantController();
+        MenuItem Pop = new MenuItem("Pop",4.15 );
+
+        assertEquals(null, rc.updateMenu(30,Pop));
     }
     // CustomerController tests
     //
