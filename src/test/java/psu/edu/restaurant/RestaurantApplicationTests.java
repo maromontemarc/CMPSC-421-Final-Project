@@ -46,6 +46,13 @@ class RestaurantApplicationTests {
     }
 
     @Test
+    void testGetMenuByIDHappy2()
+    {
+        RestaurantController rc = new RestaurantController();
+        MenuItem item = rc.getMenuById(1);
+        assertEquals(item.getItem(), "Burger");
+    }
+    @Test
     void testGetMenuByIDUnhappy()
     {
         RestaurantController rc = new RestaurantController();
@@ -61,7 +68,23 @@ class RestaurantApplicationTests {
         rc.addMenu(Pop);
         assertTrue(menuH.containsValue(Pop));
     }
+    @Test
+    void testAddMenuItemUnhappy()
+    {
+        RestaurantController rc = new RestaurantController();
+        MenuItem burger =menuH.get(1);
 
+            assertEquals(null,rc.addMenu(burger));
+
+    }
+    @Test
+    void testAddMenuItemHappy2()
+    {
+        RestaurantController rc = new RestaurantController();
+        MenuItem CokeA = new MenuItem("Coke A",2.5 );
+        rc.addMenu(CokeA);
+        assertTrue(menuH.containsValue(CokeA));
+    }
     @Test
     void testDeleteMenuItemHappy()
     {
