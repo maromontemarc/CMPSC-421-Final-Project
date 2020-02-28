@@ -237,7 +237,8 @@ class RestaurantApplicationTests {
     void testAddToCartHappy()
     {
         CartController cc = new CartController();
-
+        RestaurantController rc = new RestaurantController();
+        CustomerController customerController = new CustomerController();
         assertNotEquals(null,  cc.addToCart(1,1));
     }
 
