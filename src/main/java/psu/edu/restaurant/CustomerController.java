@@ -17,10 +17,10 @@ public class CustomerController
 
     public CustomerController()
     {
-        Customer Marc = new Customer("Marc", "648 Milltown Road", "1234");
-        Customer Tom = new Customer("Tom", "164 Crossing Ridge Trail", "5678");
-        Customer Dave = new Customer("Dave", "4323 Stanley Avenue", "9101");
-        Customer Marshall = new Customer("Marshall", "255 Ruth Street", "2312");
+        Customer Marc = new Customer("Marc", "648 Milltown Road, New Kensington, PA 15068", "1234");
+        Customer Tom = new Customer("Tom", "164 Crossing Ridge Trail, Cranberry Township, PA 16066", "5678");
+        Customer Dave = new Customer("Dave", "4323 Stanley Avenue, Erie, PA 16504", "9101");
+        Customer Marshall = new Customer("Marshall", "255 Ruth Street, Springdale, PA 15144", "2312");
 
         CustomerDTO MarcDTO = new CustomerDTO(Marc);
         CustomerDTO TomDTO = new CustomerDTO(Tom);

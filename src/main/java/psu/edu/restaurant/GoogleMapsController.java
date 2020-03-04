@@ -2,9 +2,9 @@ package psu.edu.restaurant;
 
 /*-----------Imports-----------*/
 import static psu.edu.restaurant.CustomerController.custH;
+import org.springframework.web.bind.annotation.*;
 import com.google.maps.DistanceMatrixApiRequest;
 import com.google.maps.errors.ApiException;
-import org.springframework.web.bind.annotation.*;
 import com.google.maps.DirectionsApi.RouteRestriction;
 import com.google.maps.DistanceMatrixApi;
 import com.google.maps.GeoApiContext;
@@ -56,10 +56,10 @@ public class GoogleMapsController{
 
 
 
-        if (distApart >= 20) {
+        if (distApart >= 50000) {
             s = "We do not deliver to your area.\n" +
                     "For an extra fee we will deliver.\n";
-        } else if (distApart <= 20) {
+        } else if (distApart <= 49999) {
             s ="We deliver to your area.";
         } else {
             s ="Error.\n Please try again.";
