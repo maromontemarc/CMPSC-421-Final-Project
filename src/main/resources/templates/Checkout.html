@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link href="../static/Checkout.css" type = "text/css" rel="stylesheet">
+</head>
+<body>
+
+<div class="headerContainer">
+    <h1 id="header"></h1>
+</div>
+
+<section class="cartContainer">
+    <div class="cart">
+        <ul>
+            <li th:text="${custH.get(0).name}"></li>
+        </ul>
+    </div>
+</section>
+
+<script>
+    $(function(){
+
+        var customer = prompt("Please enter your full name: ");
+
+        if(customer != null)
+        {
+            document.getElementById("header").innerHTML = "Checkout - " + customer;
+        }else{
+            document.getElementById("header").innerHTML = "Checkout - Customer";
+        }
+        //
+        // for( var i = 0; i < ${custH}.length; i++)
+        // {
+        //     console.log([${custH}].get(i).name);
+        // }
+
+        //var node = document.createElement("LI");
+
+    });
+</script>
+
+</body>
+</html>

@@ -1,14 +1,17 @@
 package psu.edu.restaurant;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 
 import static psu.edu.restaurant.RestaurantController.menuH;
 
-@RestController
+@Controller
 public class CustomerController
 {
     static public HashMap<Integer, Customer> custH = new HashMap<>();
@@ -42,6 +45,12 @@ public class CustomerController
         custH.put(custID, Marshall);
         custDTOH.put(custID, MarshallDTO);
         custID++;
+    }
+
+    @GetMapping("/Checkout")
+    public String index(Model m) {
+        m.addAttribute("custH", custH);
+        return "Checkout";
     }
 
     @GetMapping("/cust/get")
