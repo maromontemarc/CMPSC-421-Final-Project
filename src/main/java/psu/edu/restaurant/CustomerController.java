@@ -1,5 +1,6 @@
 package psu.edu.restaurant;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -8,7 +9,7 @@ import java.util.Vector;
 
 import static psu.edu.restaurant.RestaurantController.menuH;
 
-@RestController
+@Controller
 public class CustomerController
 {
     static public HashMap<Integer, Customer> custH = new HashMap<>();
@@ -111,4 +112,5 @@ public class CustomerController
             return null;
         }
     }
+
 }

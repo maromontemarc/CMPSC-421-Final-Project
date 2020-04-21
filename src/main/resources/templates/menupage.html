@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+    <link th:href="@{/restaurant.css}" type="text/css" rel="stylesheet"/>
+    <link th:href="@{/webjars/bulma/0.6.0/css/bulma.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/5.12.0/css/font-awesome.min.css}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+</head>
+<body>
+<b><h1>MENU</h1></b>
+
+<section>
+<div class ="container">
+
+        <input type=number id= "CustomerID">
+        <button id = ConfirmCustomerID> Confirm </button>
+
+</div>
+</section>
+<section class="sectionsteak">
+        <div class="container" th:fragment="logo">
+        <h1 class="title">Steak</h1>
+            <p>Cost: $12</p>
+            <img th:src="@{/steak.png}" alt="steak" height="400" width="400">
+            <p>Big Juicy 16oz Porterhouse, 2 6oz Sirloins, and a 12oz Ribeye
+           </p>
+            <p>
+                <button id = addsteak >Add 1 to cart</button> </p>
+    </div>
+
+</section>
+
+
+<section class="sectionBurger">
+    <div class="container" th:fragment="logo">
+        <h1 class="title">Burger</h1>
+        <p>Cost: $8</p>
+        <img th:src="@{/hamburger412.jpg}" alt="hburger" height="400" width="400">
+        <p>Big 6oz beef patty, no cheese, nice toasted bun, lettuce, tomato with a side of homemade fries
+        </p>
+        <p>
+            <button id = addHburger >Add 1 to cart</button> </p>
+    </div>
+
+</section>
+<section class="sectionCheeseBurger">
+    <div class="container" th:fragment="logo">
+        <h1 class="title">CheeseBurger</h1>
+        <p>Cost: $9</p>
+        <img th:src="@{/cheeseburger412.jpg}" alt="cburger" height="400" width="400">
+        <p>Big 6oz beef patty, cheddar cheese, nice toasted bun, lettuce, tomato, onions and pickles with a side of homemade fries
+        </p>
+        <p>
+            <button id = addCheeseburger >Add 1 to cart</button> </p>
+    </div>
+
+</section>
+<section class="sectionPizza">
+    <div class="container" th:fragment="logo">
+        <h1 class="title">Pizza</h1>
+        <p>Cost: $10</p>
+        <img  th:src="@{/pizza421.png}" alt="pizza" height="400" width="400">
+        <p>8 slices, thick crust with pepperoni
+        </p>
+        <p>
+            <button id = addPizza >Add 1 to cart</button> </p>
+    </div>
+
+</section>
+
+<section class="sectionGChicken">
+    <div class="container" th:fragment="logo">
+        <h1 class="title">Grilled Chicken</h1>
+        <p>Cost: $9</p>
+        <img  th:src="@{/chicken421.jpg}" alt="chicken" height="400" width="400">
+        <p>4 pieces of grilled chicken on a fresh salad with avocado
+        </p>
+        <p>
+            <button id = addChicken >Add 1 to cart</button> </p>
+    </div>
+
+</section>
+<script>
+
+</script>
+<script>
+
+
+$("#ConfirmCustomerID").click(function(){
+    var custID;
+    custID =$("#CustomerID").val();
+
+    console.log(custID);
+    return custID;
+
+});
+
+    $("#addsteak").click(function () {
+        console.log("1 Steak Added");
+        var custID;
+        custID =$("#CustomerID");
+        $.ajax({
+            type: 'PUT',
+            url: 'https://localhost:8080/cart/add?item=0&'+'id='+$("#CustomerID").val(),
+
+            data:"item=1 & id=0",
+            contentType:'application/json',
+            success: function (got) {
+                return alert("Added one steak to cart "+got);
+            }
+
+        });
+
+    });
+
+    $("#addHburger").click(function () {
+        console.log("1Hamburger Added");
+        $.ajax({
+            type: 'PUT',
+            url: 'https://localhost:8080/cart/add?item=1&'+ 'id=0',
+            data: "item=1 & id=0",
+            contentType:'application/json',
+            success: function (got) {
+                return alert("Added one steak to cart "+got);
+            }
+
+        });
+
+    });
+    $("#addCheeseburger").click(function () {
+        console.log("1 Cheeseburger Added");
+        $.ajax({
+            type: 'put',
+            url: 'https://localhost:8080/cart/add?item=2&'+'id=0',
+            data: "item=0 & id=0",
+            contentType:'application/json',
+            success: function (got) {
+                return alert("Added one steak to cart "+got);
+            }
+
+        });
+
+    });
+    $("#addPizza").click(function () {
+        console.log("1 pizza Added");
+        $.ajax({
+            type: 'put',
+            url: 'https://localhost:8080/cart/add?item=3&'+'id=0',
+            data: "item=0 & id=0",
+            contentType:'application/json',
+            success: function (got) {
+                return alert("Added one steak to cart "+got);
+            }
+
+        });
+
+    });
+    $("#addChicken").click(function () {
+        console.log("1 Grilled Chicken Added");
+        $.ajax({
+            type: 'put',
+            url: 'https://localhost:8080/cart/add?item=4&'+'id=0',
+            data: "item=0 & id=0",
+            contentType:'application/json',
+            success: function (got) {
+                return alert("Added one steak to cart "+got);
+            }
+
+        });
+
+    });
+</script>
+
+
+</body>
+</html>
+
+
