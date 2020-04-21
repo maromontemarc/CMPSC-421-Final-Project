@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
+import static psu.edu.restaurant.CouponController.coupons;
 import static psu.edu.restaurant.RestaurantController.menuH;
 
 @Controller
@@ -50,6 +51,7 @@ public class CustomerController
     @GetMapping("/Checkout")
     public String index(Model m) {
         m.addAttribute("custH", custH);
+        m.addAttribute("coupons", coupons);
         return "Checkout";
     }
 

@@ -1,11 +1,13 @@
 package psu.edu.restaurant;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.HashMap;
 
-@RestController
+@Controller
 public class CouponController {
     static public HashMap<Integer, Coupon> coupons = new HashMap<>();
     private int couponId = 0;
