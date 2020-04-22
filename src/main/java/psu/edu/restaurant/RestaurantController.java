@@ -1,5 +1,8 @@
 package psu.edu.restaurant;
-
+import static psu.edu.restaurant.CouponController.coupons;
+import static psu.edu.restaurant.CustomerController.custH;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -30,6 +33,22 @@ public class RestaurantController
         return menuH.values();
     }
 
+    @RequestMapping(value = "/menupage", method = RequestMethod.GET)
+    public String menupage(Model m) {
+        m.addAttribute("custH",custH);
+        return "menupage";
+    }
+    @GetMapping("/Checkout")
+    public String index(Model m) {
+        m.addAttribute("custH", custH);
+        m.addAttribute("coupons", coupons);
+        return "Checkout";
+    }
+
+    @RequestMapping(value = "/Home", method = RequestMethod.GET)
+    public String Home() {
+        return "Home";
+    }
     @GetMapping("/menubyid")
     public MenuItem getMenuById(@RequestParam(name = "id") int id)
     {

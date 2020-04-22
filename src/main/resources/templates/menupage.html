@@ -1,25 +1,23 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      xmlns:color="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Menu</title>
-    <link th:href="@{/restaurant.css}" type="text/css" rel="stylesheet"/>
+    <link th:href="@{/menupage.css}" type="text/css" rel="stylesheet"/>
     <link th:href="@{/webjars/bulma/0.6.0/css/bulma.css}" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" th:href="@{/webjars/font-awesome/5.12.0/css/font-awesome.min.css}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 </head>
 <body>
-<b><h1>MENU</h1></b>
 
-<section>
-<div class ="container">
-
-        <input type=number id= "CustomerID">
-        <button id = ConfirmCustomerID> Confirm </button>
-
+<div class = title1>
+    <h2>MENU</h2>
 </div>
-</section>
+
 <section class="sectionsteak">
         <div class="container" th:fragment="logo">
         <h1 class="title">Steak</h1>
@@ -28,7 +26,7 @@
             <p>Big Juicy 16oz Porterhouse, 2 6oz Sirloins, and a 12oz Ribeye
            </p>
             <p>
-                <button id = addsteak >Add 1 to cart</button> </p>
+                <button id = addsteak class = "btn btn-2 btn-sep icon-cart" >Add 1 to cart</button> </p>
     </div>
 
 </section>
@@ -42,7 +40,7 @@
         <p>Big 6oz beef patty, no cheese, nice toasted bun, lettuce, tomato with a side of homemade fries
         </p>
         <p>
-            <button id = addHburger >Add 1 to cart</button> </p>
+            <button id = addHburger class = "btn btn-2 btn-sep icon-cart">Add 1 to cart</button> </p>
     </div>
 
 </section>
@@ -54,7 +52,7 @@
         <p>Big 6oz beef patty, cheddar cheese, nice toasted bun, lettuce, tomato, onions and pickles with a side of homemade fries
         </p>
         <p>
-            <button id = addCheeseburger >Add 1 to cart</button> </p>
+            <button id = addCheeseburger class = "btn btn-2 btn-sep icon-cart">Add 1 to cart</button> </p>
     </div>
 
 </section>
@@ -66,7 +64,7 @@
         <p>8 slices, thick crust with pepperoni
         </p>
         <p>
-            <button id = addPizza >Add 1 to cart</button> </p>
+            <button id = addPizza class = "btn btn-2 btn-sep icon-cart">Add 1 to cart</button> </p>
     </div>
 
 </section>
@@ -75,18 +73,28 @@
     <div class="container" th:fragment="logo">
         <h1 class="title">Grilled Chicken</h1>
         <p>Cost: $9</p>
-        <img  th:src="@{/chicken421.jpg}" alt="chicken" height="400" width="400">
+        <img src="../static/steak.png" th:src="@{/chicken421.jpg}" alt="chicken" height="400" width="400">
         <p>4 pieces of grilled chicken on a fresh salad with avocado
         </p>
         <p>
-            <button id = addChicken >Add 1 to cart</button> </p>
+
+            <button id = addChicken class = "btn btn-2 btn-sep icon-cart">Add 1 to cart</button> </p>
     </div>
 
 </section>
+<section class = "Checkout Button">
+    <div class = "checkout">
+
+        <button onclick="location.href='https://localhost:8080/Checkout'" id = checkout class = "btn btn-2 btn-sep icon-send">Checkout</button>
+    </div>
+</section>
+
 <script>
 
 </script>
+
 <script>
+
 
 
 $("#ConfirmCustomerID").click(function(){
@@ -98,18 +106,23 @@ $("#ConfirmCustomerID").click(function(){
 
 });
 
+var custid;
+$.get("/cust/id", function(data){
+    custid=data;
+});
+
+
+
+
     $("#addsteak").click(function () {
         console.log("1 Steak Added");
-        var custID;
-        custID =$("#CustomerID");
         $.ajax({
             type: 'PUT',
-            url: 'https://localhost:8080/cart/add?item=0&'+'id='+$("#CustomerID").val(),
-
+            url: 'https://localhost:8080/cart/add?item=0&'+'id='+custid,
             data:"item=1 & id=0",
             contentType:'application/json',
-            success: function (got) {
-                return alert("Added one steak to cart "+got);
+            success: function () {
+                return alert("Added one steak to cart ");
             }
 
         });
@@ -120,11 +133,11 @@ $("#ConfirmCustomerID").click(function(){
         console.log("1Hamburger Added");
         $.ajax({
             type: 'PUT',
-            url: 'https://localhost:8080/cart/add?item=1&'+ 'id=0',
+            url: 'https://localhost:8080/cart/add?item=1&'+ 'id='+custid,
             data: "item=1 & id=0",
             contentType:'application/json',
-            success: function (got) {
-                return alert("Added one steak to cart "+got);
+            success: function () {
+                return alert("Added one steak to cart ");
             }
 
         });
@@ -134,11 +147,11 @@ $("#ConfirmCustomerID").click(function(){
         console.log("1 Cheeseburger Added");
         $.ajax({
             type: 'put',
-            url: 'https://localhost:8080/cart/add?item=2&'+'id=0',
+            url: 'https://localhost:8080/cart/add?item=2&'+'id='+custid,
             data: "item=0 & id=0",
             contentType:'application/json',
-            success: function (got) {
-                return alert("Added one steak to cart "+got);
+            success: function() {
+                return alert("Added one steak to cart ");
             }
 
         });
@@ -148,11 +161,11 @@ $("#ConfirmCustomerID").click(function(){
         console.log("1 pizza Added");
         $.ajax({
             type: 'put',
-            url: 'https://localhost:8080/cart/add?item=3&'+'id=0',
+            url: 'https://localhost:8080/cart/add?item=3&'+'id='+custid,
             data: "item=0 & id=0",
             contentType:'application/json',
-            success: function (got) {
-                return alert("Added one steak to cart "+got);
+            success: function () {
+                return alert("Added one steak to cart ");
             }
 
         });
@@ -162,16 +175,17 @@ $("#ConfirmCustomerID").click(function(){
         console.log("1 Grilled Chicken Added");
         $.ajax({
             type: 'put',
-            url: 'https://localhost:8080/cart/add?item=4&'+'id=0',
+            url: 'https://localhost:8080/cart/add?item=4&'+'id='+custid,
             data: "item=0 & id=0",
             contentType:'application/json',
-            success: function (got) {
-                return alert("Added one steak to cart "+got);
+            success: function () {
+                return alert("Added one steak to cart ");
             }
 
         });
 
     });
+
 </script>
 
 

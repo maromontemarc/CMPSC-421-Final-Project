@@ -31,32 +31,39 @@
 <script th:inline="javascript">
     $(function(){
 
-        var id = prompt("Please enter your Customer ID: ");
+
         var customer = [[${custH}]];
         var coupons = [[${coupons}]];
         var method;
+        var cust;
+        var custid;
+        $.get("/cust/id", function(data){
+            custid =data;
+            cust=customer[data].name;
+            document.getElementById("header").innerHTML = "Checkout - " + cust;
+        });
 
-        if(id != null)
-        {
-            document.getElementById("header").innerHTML = "Checkout - " + customer[id].name;
-        }else{
-            document.getElementById("header").innerHTML = "Checkout - Customer";
-        }
+
+
+
+
+
+
 
         $("#calc").click(function(){
             var total = 0;
 
-            if(customer[id].cart.length == 0)
+            if(customer[custid].cart.length == 0)
             {
                 document.getElementById("total").innerHTML = "Cart is empty";
             }
             else
             {
-                for(var i = 0; i < customer[id].cart.length; i++)
+                for(var i = 0; i < customer[custid].cart.length; i++)
                 {
                     var node = document.createElement("LI");
-                    total += customer[id].cart[i].price;
-                    var textnode = document.createTextNode(customer[id].cart[i].item + " $" + customer[id].cart[i].price);
+                    total += customer[custid].cart[i].price;
+                    var textnode = document.createTextNode(customer[custid].cart[i].item + " $" + customer[custid].cart[i].price);
                     node.appendChild(textnode);
                     document.getElementById("list").appendChild(node);
                 }
@@ -88,7 +95,7 @@
         });
 
         $("#checkout").click(function(){
-            var url = "/cart/checkout?id=" + parseInt(id) + "&method=" + method + "&cId=";
+            var url = "/cart/checkout?id=" + parseInt(custid) + "&method=" + method + "&cId=";
 
             if(document.getElementById("coupon").value !== ""){
                 url += parseInt(document.getElementById("coupon").value);

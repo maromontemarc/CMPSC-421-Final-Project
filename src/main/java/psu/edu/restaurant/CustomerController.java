@@ -1,6 +1,7 @@
 package psu.edu.restaurant;
-
-import org.springframework.stereotype.Controller;
+import static psu.edu.restaurant.CouponController.coupons;
+import org.springframework.http.MediaType;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -9,7 +10,7 @@ import java.util.Vector;
 
 import static psu.edu.restaurant.RestaurantController.menuH;
 
-@Controller
+@RestController
 public class CustomerController
 {
     static public HashMap<Integer, Customer> custH = new HashMap<>();
@@ -45,6 +46,7 @@ public class CustomerController
         custID++;
     }
 
+
     @GetMapping("/cust/get")
     public Customer getCustomer(@RequestParam(name = "id") int id)
     {
@@ -63,22 +65,26 @@ public class CustomerController
         return custDTOH.values();
     }
 
-    @PostMapping("/cust/create")
+    @RequestMapping(value = "/cust/create", method = RequestMethod.POST,  consumes= MediaType.APPLICATION_JSON_VALUE)
     public String createCustomer(@RequestBody Customer cust)
     {
         if(custH.containsValue(cust)){
             return "This Customer already exists";
-    }
+        }
         else {
             custH.put(custID, cust);
             CustomerDTO custDTO = new CustomerDTO(cust);
             custDTOH.put(custID, custDTO);
             custID++;
 
-            return cust.getName();
+            return ""+(custID-1);
         }
     }
-
+@GetMapping("/cust/id")
+public int lastcustid()
+{
+    return custID-1;
+}
     @DeleteMapping("/cust/delete")
     public Collection<Customer> deleteCustomer(@RequestParam(name = "id") int id )
     {
@@ -112,5 +118,4 @@ public class CustomerController
             return null;
         }
     }
-
 }

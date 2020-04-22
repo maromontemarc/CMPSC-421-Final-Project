@@ -10,9 +10,9 @@ function CreateCustomer() {
             contentType: "application/json",
             data: JSON.stringify({ name: name, address: address, ccn: CC}),
             success: function (result) {
+                var id = result;
                 console.log(result);
         }});
-
 
 
 }

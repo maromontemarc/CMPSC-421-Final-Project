@@ -20,6 +20,7 @@ class RestaurantApplicationTests {
 
     // RestaurantController tests
     //
+
     @Test
     void testGetMenu()
     {
@@ -135,6 +136,7 @@ class RestaurantApplicationTests {
     }
     // CustomerController tests
     //
+
 
     @Test
     void testGetCustHappy()
@@ -467,4 +469,5 @@ class RestaurantApplicationTests {
         cc.addToCart(0, 0);
         Assertions.assertEquals(-1, cc.checkOut(-1, "Delivery", -1));
     }
+
 }
