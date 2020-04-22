@@ -1,7 +1,5 @@
 package psu.edu.restaurant;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -30,14 +28,7 @@ public class RestaurantController
     public Collection<MenuItem> getMenu()
     {
         return menuH.values();
-
     }
-
-    @RequestMapping(value = "/menupage", method = RequestMethod.GET)
-    public String menupage() {
-        return "menupage";
-    }
-
 
     @GetMapping("/menubyid")
     public MenuItem getMenuById(@RequestParam(name = "id") int id)

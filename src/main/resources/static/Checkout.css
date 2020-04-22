@@ -1,0 +1,51 @@
+
+.headerContainer {
+    position: relative;
+    background-color: lightgrey;
+    border: 3px solid black;
+    margin: auto;
+    width: 720px;
+}
+
+.headerContainer h1 {
+    text-align:center;
+}
+
+.cartContainer {
+    position:relative;
+}
+
+.cart{
+    margin:auto;
+    overflow: auto;
+    height: 480px;
+    width: 720px;
+    border: 3px solid grey;
+}
+
+.cart input {
+    margin-left: 20px;
+}
+
+.cart button {
+    margin-left: 20px;
+}
+
+.cart label {
+    margin-left: 20px;
+}
+.cart li {
+    text-align: left;
+}
+
+#total {
+    text-align: center;
+}
+
+#checkout{
+    margin-top: 10px;
+}
+
+#calc {
+    margin-top: 10px;
+}
