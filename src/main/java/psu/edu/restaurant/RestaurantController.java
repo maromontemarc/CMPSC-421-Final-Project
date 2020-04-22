@@ -47,9 +47,14 @@ public class RestaurantController
     @PostMapping("/menu/add")
     public Collection<MenuItem> addMenu(@RequestBody MenuItem item)
     {
-        menuH.put(menuID++, item);
-        return menuH.values();
-    }
+        if(!menuH.containsValue(item)){
+            menuH.put(menuID++, item);
+            return menuH.values();
+        }
+
+       else{
+        return null;
+    }}
 
     @DeleteMapping("/menu/delete")
     public Collection<MenuItem> deleteMenu(@RequestParam(name = "id") int id)

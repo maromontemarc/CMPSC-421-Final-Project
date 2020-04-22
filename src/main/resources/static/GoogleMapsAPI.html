@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script defer src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en&key=AIzaSyBGniA1rrvIP6kzMywmO9o1DXTt3jCcX9I" type="text/javascript"></script>
+    <meta charset="UTF-8">
+    <title>Google Maps API</title>
+    <meta name ="viewport" content="width=device-width, initial-scale=1.0, user-scaleable=no">
+    <style>
+        /*Setting height of map to define size of the div*/
+        #map {
+            height: 100%;
+        }
+        html, body {
+            height:400px;
+            width:100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+
+    <script>
+        var map;
+        function initMap(){
+
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 42.1183385, lng: -79.979531},
+                zoom: 16,
+                styles: [
+                    {elementType: 'geometry', stylers:[{color:'#242f3e'}]}, //Changes the background color
+                    {elementType: 'labels.text.stroke', stylers:[{color: '#242f3e'}] }, //Makes Text more readable
+                    {elementType: 'labels.text.fill', stylers: [{color:'#746855'}]} //Changes the fill of the text
+                ]
+            });
+        }
+    </script>
+
+
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGniA1rrvIP6kzMywmO9o1DXTt3jCcX9I&callback=initMap"
+            async defer></script>
+</body>
+</html>

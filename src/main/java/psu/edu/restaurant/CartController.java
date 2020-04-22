@@ -1,12 +1,10 @@
 package psu.edu.restaurant;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Vector;
 
+import static psu.edu.restaurant.CouponController.coupons;
 import static psu.edu.restaurant.CustomerController.custDTOH;
 import static psu.edu.restaurant.CustomerController.custH;
 import static psu.edu.restaurant.RestaurantController.menuH;
@@ -14,6 +12,7 @@ import static psu.edu.restaurant.RestaurantController.menuH;
 @RestController
 public class CartController
 {
+
     @PutMapping("/cart/add")
     public Vector<MenuItem> addToCart(@RequestParam(name = "item") int item, @RequestParam(name = "id") int id)
     {
@@ -39,7 +38,7 @@ public class CartController
             custH.get(id).cart.clear();
             return custH.get(id).cart;
         }
-        else if(custH.get(id).cart.isEmpty())
+        else if(custH.containsKey(id) && custH.get(id).cart.isEmpty())
         {
             System.out.println("Cart is already empty.");
             return custH.get(id).cart;
@@ -68,7 +67,7 @@ public class CartController
     }
 
     @PutMapping("/cart/checkout")
-    public double checkOut(@RequestParam(name = "id") int id, @RequestParam(name = "method") String method)
+    public double checkOut(@RequestParam(name = "id") int id, @RequestParam(name = "method") String method, @RequestParam(name = "cId") int cId)
     {
         if(custH.containsKey(id) && !custH.get(id).cart.isEmpty() &&
                 (method.equalsIgnoreCase("Pickup") || method.equalsIgnoreCase("Delivery")))
@@ -79,7 +78,7 @@ public class CartController
             {
                 total += 2;
             }
-            else {
+            else if(method.equalsIgnoreCase("Delivery")) {
                 System.out.println("Ccn Error");
                 return -1;
             }
@@ -88,6 +87,10 @@ public class CartController
             {
                 total += custH.get(id).cart.elementAt(i).price;
             }
+            if(coupons.get(cId) != null) {
+                total = total - (total* coupons.get(cId).getDiscount());
+            }
+
 
             custH.get(id).cart.clear();
             return total;

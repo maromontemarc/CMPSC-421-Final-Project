@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link th:href="@{/Checkout.css}" type = "text/css" rel="stylesheet">
+</head>
+<body>
+
+<div class="headerContainer">
+    <h1 id="header"></h1>
+</div>
+
+<section class="cartContainer">
+    <div class="cart">
+        <label><input type="radio" name="method" value="pickup" checked> Pickup</label><br>
+        <label><input id="del" type="radio" name="method" value="delivery"> Delivery</label><br>
+        <label>Coupon Code</label><br>
+        <input id="coupon" type="text" name="coupon"><br>
+        <button id="calc" type="button">Calculate Total</button><br>
+        <button id="checkout" type="button">Checkout</button>
+        <ul id="list">
+        </ul>
+        <h2 id="total"></h2>
+    </div>
+</section>
+
+
+
+<script th:inline="javascript">
+    $(function(){
+
+        var id = prompt("Please enter your Customer ID: ");
+        var customer = [[${custH}]];
+        var coupons = [[${coupons}]];
+        var method;
+
+        if(id != null)
+        {
+            document.getElementById("header").innerHTML = "Checkout - " + customer[id].name;
+        }else{
+            document.getElementById("header").innerHTML = "Checkout - Customer";
+        }
+
+        $("#calc").click(function(){
+            var total = 0;
+
+            if(customer[id].cart.length == 0)
+            {
+                document.getElementById("total").innerHTML = "Cart is empty";
+            }
+            else
+            {
+                for(var i = 0; i < customer[id].cart.length; i++)
+                {
+                    var node = document.createElement("LI");
+                    total += customer[id].cart[i].price;
+                    var textnode = document.createTextNode(customer[id].cart[i].item + " $" + customer[id].cart[i].price);
+                    node.appendChild(textnode);
+                    document.getElementById("list").appendChild(node);
+                }
+
+                if(document.getElementById("del").checked){
+                    var node = document.createElement("LI");
+                    var textnode = document.createTextNode("Delivery $2");
+                    node.appendChild(textnode);
+                    document.getElementById("list").appendChild(node);
+                    total += 2;
+                    method="Delivery";
+                }
+                else
+                {
+                    method="Pickup";
+                }
+
+                if(document.getElementById("coupon").value !== "")
+                {
+                    var node = document.createElement("LI");
+                    var textnode = document.createTextNode("Coupon: " + coupons[document.getElementById("coupon").value].name);
+                    node.appendChild(textnode);
+                    document.getElementById("list").appendChild(node);
+                    total = total - (total * coupons[document.getElementById("coupon").value].discount);
+                }
+
+                document.getElementById("total").innerHTML = "Total: $" + total;
+            }
+        });
+
+        $("#checkout").click(function(){
+            var url = "/cart/checkout?id=" + parseInt(id) + "&method=" + method + "&cId=";
+
+            if(document.getElementById("coupon").value !== ""){
+                url += parseInt(document.getElementById("coupon").value);
+            }
+            else{
+                url += -1;
+            }
+            $.ajax({
+               url: url,
+               type: "PUT",
+                success : function(){
+                   alert("Order has been placed.");
+                }
+            });
+
+            while(document.getElementById("list").firstChild)
+            {
+                document.getElementById("list").removeChild(document.getElementById("list").firstChild);
+            }
+            document.getElementById("total").innerHTML = "Cart is empty";
+        });
+    });
+</script>
+
+</body>
+</html>
