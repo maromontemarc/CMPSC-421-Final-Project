@@ -1,0 +1,66 @@
+{box-sizing: border-box;}
+
+
+
+
+#Ltitle{
+    font-size: 40px;
+    color: white;
+
+}
+b{
+    color: white;
+}
+#form-popup{
+    position: absolute;
+    display: block;
+    left: 40%;
+    top: 30%;
+    text-decoration: white;
+    z-index: 11;
+
+}
+
+/* The popup form - hidden by default */
+#form-popup {
+
+    border: 3px solid;
+
+    text-decoration: white;
+    max-width: 300px;
+    padding: 10px;
+    background-color: black;
+    text-decoration: white;
+
+}
+
+/* Add styles to the form container */
+
+/* Full-width input fields */
+#form-popup  input[type=text], .form-container input[type=password] {
+    width: 92%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+}
+
+
+/* Set a style for the submit/login button */
+#form-popup  .btn {
+    background-color: green;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:10px;
+    opacity: 0.8;
+}
+
+
+
+/* Add some hover effects to buttons */
+#form-popup  .btn:hover, .open-button:hover {
+    opacity: 1;
+}

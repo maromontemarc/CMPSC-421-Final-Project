@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurant</title>
+    <link th:href="@{/login.css}" type="text/css" rel="stylesheet"/>
+
+
+</head>
+<body bgcolor="white">
+<div id = box>
+    <div id ="FullTitle">
+        <img id = "forks" th:src="@{/forks.jpg}" alt="forks">
+        <div id="title">
+            Restaurant Name <br>
+        </div>
+        <div id = "greeting">
+            Welcome to our restaurant. We pride ourselves on our delicious entrees  and the high quality ingredients that go into them. <br>
+            To find something you would like navigate to our menu page. Our menu page shows all of our entrees along with the associated costs. <br>
+            Once you decide on the items you would like add them to your cart and proceed to the cart page where you will be directed to checkout.
+        </div>
+    </div>
+        <div id = "options">
+            <input type="image" th:src="@{/menu.PNG}" name="menu" class="submit" id="menu" onclick="window.location.href='/menupage'"/>
+        </div>
+
+
+        <div id="form-popup">
+
+
+                <h1 id = "Ltitle">Enter Information To Continue</h1>
+
+
+
+                <label id = "Name"><b>Name</b></label>
+                <input id ="N" type="text" placeholder="Enter Name" name="Name" required>
+
+                <label id = "Address"><b>Address</b></label>
+                <input id ="A" type="text" placeholder="Enter Address" name="Address" required>
+
+                <label id = "CC"><b>Credit Card Number</b></label>
+                <input id ="C" type="text" placeholder="Credit Card Number" name="CC" required>
+
+
+
+                <button type="submit" class="btn" onclick="closeForm()">Submit</button>
+
+
+        </div>
+
+
+</div>
+<div id = "cover">
+
+</div>
+
+
+
+
+
+
+
+
+
+<style>
+    #cover{
+        top:10%;
+        display: block;
+        width: 100%;
+        background: transparent;
+        position: absolute;
+        height: 100%;
+        z-index: 10;
+    }
+
+    #FullTitle{
+        text-align: center;
+        position: relative;
+        display: inline-block;
+
+    }
+    #forks{
+
+    }
+    #title{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: Edwardian Script ITC;
+        font-size: 50px;
+    }
+    #greeting{
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+    }
+    #box{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction:column;
+    }
+    #options{
+        padding: 5%;
+    }
+    #menu{
+        border-radius: 50%;
+        font-size: 50px;
+        cursor: pointer;
+        border: 4px solid black;
+        background-color: white;
+        color: black;
+        border-color: red;
+    }
+
+</style>
+<script>
+function closeForm() {
+    CreateCustomer();
+   document.getElementById("cover").style.display = "none";
+   document.getElementById("form-popup").style.display = "none";
+
+}
+</script>
+<script type="text/javascript" th:src="@{/CreateAccountForm.js}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</body>
+</html>

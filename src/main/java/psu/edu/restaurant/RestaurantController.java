@@ -1,11 +1,12 @@
 package psu.edu.restaurant;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.HashMap;
 
-@RestController
+@Controller
 public class RestaurantController
 {
     static public HashMap<Integer, MenuItem> menuH = new HashMap<>();
@@ -77,5 +78,9 @@ public class RestaurantController
         {
             return null;
         }
+    }
+    @RequestMapping(value = "/Home", method = RequestMethod.GET)
+    public String menupage() {
+        return "Home";
     }
 }

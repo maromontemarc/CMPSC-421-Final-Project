@@ -1,5 +1,6 @@
 package psu.edu.restaurant;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -62,7 +63,7 @@ public class CustomerController
         return custDTOH.values();
     }
 
-    @PostMapping("/cust/create")
+    @RequestMapping(value = "/cust/create", method = RequestMethod.POST,  consumes= MediaType.APPLICATION_JSON_VALUE)
     public String createCustomer(@RequestBody Customer cust)
     {
         if(custH.containsValue(cust)){
@@ -77,6 +78,10 @@ public class CustomerController
             return cust.getName();
         }
     }
+
+
+
+
 
     @DeleteMapping("/cust/delete")
     public Collection<Customer> deleteCustomer(@RequestParam(name = "id") int id )
