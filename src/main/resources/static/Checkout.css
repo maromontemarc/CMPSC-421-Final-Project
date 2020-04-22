@@ -1,14 +1,23 @@
 
+body {
+    background-color: grey;
+}
+
 .headerContainer {
     position: relative;
     background-color: lightgrey;
     border: 3px solid black;
     margin: auto;
     width: 720px;
+    height: 120px;
+    margin-top: 5%;
 }
 
 .headerContainer h1 {
     text-align:center;
+    font-weight: 900;
+    font-family: "Bauhaus 93";
+    font-size: 50px;
 }
 
 .cartContainer {
@@ -18,13 +27,16 @@
 .cart{
     margin:auto;
     overflow: auto;
-    height: 480px;
+    height: 600px;
     width: 720px;
-    border: 3px solid grey;
+    border: 3px solid black;
+    background-color: lightgrey;
 }
 
 .cart input {
     margin-left: 20px;
+    margin-bottom: 8px;
+    margin-top: 8px;
 }
 
 .cart button {
@@ -33,13 +45,21 @@
 
 .cart label {
     margin-left: 20px;
+    font-family: 'Lato';
 }
 .cart li {
     text-align: left;
+    font-family: "Berlin Sans FB";
+    font-size: 30px;
 }
 
+.list {
+    position:absolute;
+    display: inline-block;
+}
 #total {
-    text-align: center;
+    font-family: "Berlin Sans FB";
+    font-size: 30px;
 }
 
 #checkout{
@@ -48,4 +68,86 @@
 
 #calc {
     margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.btn {
+    height: 40px;
+    width: 150px;
+    border: none;
+    font-family: 'Lato';
+    font-size: 10px;
+    color: inherit;
+    background: none;
+    cursor: pointer;
+    padding: 8px 30px;
+    display: inline-block;
+    margin: 4px 9px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    outline: none;
+    position: relative;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.btn:after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+/* Pseudo elements for icons */
+.btn:before {
+    font-family: 'FontAwesome';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+/* Icon separator */
+.btn-sep {
+    padding: 5px 5px 5px 70px;
+}
+
+.btn-sep:before {
+    background: rgba(0,0,0,0.15);
+}
+
+.btn-2 {
+    background: #2ecc71;
+    color: #fff;
+}
+
+.btn-2:hover {
+    background: #27ae60;
+}
+
+.btn-2:active {
+    background: #27ae60;
+    top: 2px;
+}
+
+.btn-2:before {
+    position: absolute;
+    height: 100%;
+    left: 0;
+    top: 0;
+    line-height: 3;
+    font-size: 140%;
+    width: 60px;
+}
+.icon-send:before {
+    content: "\f1d8";
 }

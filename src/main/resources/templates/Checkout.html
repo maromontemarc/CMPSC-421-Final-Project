@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Checkout</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link th:href="@{/Checkout.css}" type = "text/css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/5.12.0/css/font-awesome.min.css}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
@@ -14,15 +17,20 @@
 
 <section class="cartContainer">
     <div class="cart">
-        <label><input type="radio" name="method" value="pickup" checked> Pickup</label><br>
-        <label><input id="del" type="radio" name="method" value="delivery"> Delivery</label><br>
-        <label>Coupon Code</label><br>
-        <input id="coupon" type="text" name="coupon"><br>
-        <button id="calc" type="button">Calculate Total</button><br>
-        <button id="checkout" type="button">Checkout</button>
-        <ul id="list">
-        </ul>
-        <h2 id="total"></h2>
+        <div style="float: left;">
+            <label><input type="radio" name="method" value="pickup" checked> Pickup</label><br>
+            <label><input id="del" type="radio" name="method" value="delivery"> Delivery</label><br>
+            <label>Coupon Code</label><br>
+            <input id="coupon" type="text" name="coupon"><br>
+            <button id="calc" type="button" class = "btn btn-2 btn-sep icon-send">Calculate Total</button><br>
+            <button id="checkout" type="button" class = "btn btn-2 btn-sep icon-send">Checkout</button><br>
+            <button id="menu" type="button" class = "btn btn-2 btn-sep icon-send">Menu</button>
+        </div>
+        <div style="float: left; padding-left: 100px;">
+            <ul id="list">
+            </ul>
+            <h2 id="total"></h2>
+        </div>
     </div>
 </section>
 
@@ -30,8 +38,6 @@
 
 <script th:inline="javascript">
     $(function(){
-
-
         var customer = [[${custH}]];
         var coupons = [[${coupons}]];
         var method;
@@ -43,13 +49,6 @@
             document.getElementById("header").innerHTML = "Checkout - " + cust;
         });
 
-
-
-
-
-
-
-
         $("#calc").click(function(){
             var total = 0;
 
@@ -59,6 +58,11 @@
             }
             else
             {
+                while(document.getElementById("list").firstChild)
+                {
+                    document.getElementById("list").removeChild(document.getElementById("list").firstChild);
+                }
+
                 for(var i = 0; i < customer[custid].cart.length; i++)
                 {
                     var node = document.createElement("LI");
@@ -90,7 +94,7 @@
                     total = total - (total * coupons[document.getElementById("coupon").value].discount);
                 }
 
-                document.getElementById("total").innerHTML = "Total: $" + total;
+                document.getElementById("total").innerHTML = "Total: $" + total.toFixed(2);
             }
         });
 
@@ -117,6 +121,12 @@
             }
             document.getElementById("total").innerHTML = "Cart is empty";
         });
+
+        $("#menu").click(function() {
+
+            location.href="https://localhost:8080/menupage";
+        });
+
     });
 </script>
 
