@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.naming.Name;
+import java.awt.*;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +15,7 @@ public class RestaurantController
 {
     static public HashMap<Integer, MenuItem> menuH = new HashMap<>();
     private int menuID = 0;
+
     public RestaurantController()
     {
         MenuItem steak = new MenuItem("Steak", 12);
@@ -25,6 +28,9 @@ public class RestaurantController
         menuH.put(menuID++, cheeseBurger);
         menuH.put(menuID++, pizza);
         menuH.put(menuID++, grilledChicken);
+
+
+
     }
 
     @GetMapping("/menu")
