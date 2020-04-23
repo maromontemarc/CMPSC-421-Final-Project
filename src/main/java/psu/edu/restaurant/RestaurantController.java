@@ -48,6 +48,7 @@ public class RestaurantController
     public String index(Model m) {
         m.addAttribute("custH", custH);
         m.addAttribute("coupons", coupons);
+        m.addAttribute("menuH", menuH);
         return "Checkout";
     }
 

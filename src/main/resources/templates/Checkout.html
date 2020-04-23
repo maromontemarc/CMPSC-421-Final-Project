@@ -20,16 +20,19 @@
         <div style="float: left;">
             <label><input type="radio" name="method" value="pickup" checked> Pickup</label><br>
             <label><input id="del" type="radio" name="method" value="delivery"> Delivery</label><br>
-            <label>Coupon Code</label><br>
-            <input id="coupon" type="text" name="coupon"><br>
+            <label>Coupon Code: </label><br>
+            <input id="coupon" type="text" name="coupon" class="num"><br>
             <button id="calc" type="button" class = "btn btn-2 btn-sep icon-send">Calculate Total</button><br>
             <button id="clear" type="button" class = "btn btn-2 btn-sep icon-send">Clear Cart</button><br>
             <button id="checkout" type="button" class = "btn btn-2 btn-sep icon-send">Checkout</button><br>
-            <button id="menu" type="button" class = "btn btn-2 btn-sep icon-send">Menu</button>
+            <button id="menu" type="button" class = "btn btn-2 btn-sep icon-send">Menu</button><br><br>
+            <label>Delete Item: </label><br>
+            <input id="deleteItem" type="text" name="item" class="num"><br>
+            <button id="delete" type="button" class = "btn btn-2 btn-sep icon-send">Delete Item</button>
         </div>
         <div style="float: left; padding-left: 100px;">
-            <ul id="list">
-            </ul>
+            <ol id="list">
+            </ol>
             <h2 id="total"></h2>
         </div>
     </div>
@@ -41,9 +44,27 @@
     $(function(){
         var customer = [[${custH}]];
         var coupons = [[${coupons}]];
+        var menu = [[${menuH}]];
         var method;
         var cust;
         var custid;
+
+        $(".num").bind("keypress", function (e) {
+
+            var keyCode = e.which ? e.which : e.keyCode
+
+            if (!(keyCode >= 48 && keyCode <= 57)) {
+
+                $(".error").css("display", "inline");
+
+                return false;
+
+            } else {
+
+                $(".error").css("display", "none");
+
+            }
+        });
 
         $.get("/cust/id", function(data){
             custid =data;
@@ -55,6 +76,10 @@
             var total = 0;
             if(customer[custid].cart.length === 0)
             {
+                while(document.getElementById("list").firstChild)
+                {
+                    document.getElementById("list").removeChild(document.getElementById("list").firstChild);
+                }
                 document.getElementById("total").innerHTML = "Cart is empty";
             }
             else
@@ -145,6 +170,29 @@
         $("#menu").click(function() {
 
             location.href="https://localhost:8080/menupage";
+        });
+
+        $("#delete").click(function(){
+            if(document.getElementById("deleteItem").value !== "") {
+
+                var item = 0;
+
+                while(menu[item].item !== customer[custid].cart[document.getElementById("deleteItem").value - 1].item)
+                {
+                    item++;
+                }
+
+                var url = "/cart/delete?item=" + parseInt(item) + "&id=" + parseInt(custid);
+                $.ajax({
+                    url: url,
+                    type: "DELETE",
+                    success: function () {
+                        alert("Item removed from cart.");
+                    }
+                });
+                customer[custid].cart.splice(document.getElementById("deleteItem").value - 1, 1);
+                $("#calc").click();
+            }
         });
 
     });

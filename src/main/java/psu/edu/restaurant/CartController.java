@@ -57,7 +57,7 @@ public class CartController
         if(custH.containsKey(id) && menuH.containsKey(item)) {
             custH.get(id).getCart().remove(menuH.get(item));
             custDTOH.get(id).getCart().remove(menuH.get(item));
-
+            System.out.println(menuH.get(item).item);
             return custH.get(id).getCart();
         }
         else
