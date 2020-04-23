@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Administrative</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link th:href="@{/Admin.css}" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/5.12.0/css/font-awesome.min.css}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <style>
+        h1 {
+            text-align: left;
+            background-color: #808080;
+            border-style: double;
+            border: 3px solid black;
+
+        };
+    </style>
+
+    <style>
+        label {
+            font-size: 30px;
+        }
+    </style>
+    <style>
+        textarea {
+            text-align: center;
+        }
+    </style>
+    <style>
+        button {
+            margin-left: 10px;
+            margin-bottom: 10px;
+            margin-top: 10px;
+            margin-right: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<script>
+    function couponButton() {
+        document.getElementById("afterFunction").value =
+            document.getElementById("couponArea").value;
+    }
+</script>
+<script>
+    function menuButton(){
+        document.getElementById("afterMenuFunction").value =
+            document.getElementById("menuArea").value
+    }
+</script>
+
+
+<div>
+    <h1>Create New Coupon</h1>
+    <label>Coupon Code: </label>
+    <textarea id="couponArea">Enter Coupon code here</textarea>
+    <button onclick="couponButton()">Finalize Coupon</button>
+    <textarea id="afterFunction"></textarea>
+</div>
+
+<div>
+    <h1>Create New Menu Item</h1>
+    <label>Menu Item: </label>
+    <textarea id="menuArea">Enter Menu Item here</textarea>
+    <button onclick="menuButton()">Finalize Menu item</button>
+    <textarea id="afterMenuFunction"></textarea>
+</div>
+
+<div>
+    <h1>Create New Customer</h1>
+    <label>Customer</label>
+    <textarea></textarea>
+    <button>Customer Button</button>
+</div>
+
+</body>
+
+</html>
