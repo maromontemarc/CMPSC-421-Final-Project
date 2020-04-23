@@ -36,6 +36,7 @@ public class CartController
         if(custH.containsKey(id) && !custH.get(id).cart.isEmpty())
         {
             custH.get(id).cart.clear();
+            System.out.println(custH.get(id).cart.size());
             return custH.get(id).cart;
         }
         else if(custH.containsKey(id) && custH.get(id).cart.isEmpty())
