@@ -23,6 +23,7 @@
             <label>Coupon Code</label><br>
             <input id="coupon" type="text" name="coupon"><br>
             <button id="calc" type="button" class = "btn btn-2 btn-sep icon-send">Calculate Total</button><br>
+            <button id="clear" type="button" class = "btn btn-2 btn-sep icon-send">Clear Cart</button><br>
             <button id="checkout" type="button" class = "btn btn-2 btn-sep icon-send">Checkout</button><br>
             <button id="menu" type="button" class = "btn btn-2 btn-sep icon-send">Menu</button>
         </div>
@@ -43,6 +44,7 @@
         var method;
         var cust;
         var custid;
+
         $.get("/cust/id", function(data){
             custid =data;
             cust=customer[data].name;
@@ -51,8 +53,7 @@
 
         $("#calc").click(function(){
             var total = 0;
-
-            if(customer[custid].cart.length == 0)
+            if(customer[custid].cart.length === 0)
             {
                 document.getElementById("total").innerHTML = "Cart is empty";
             }
@@ -85,7 +86,7 @@
                     method="Pickup";
                 }
 
-                if(document.getElementById("coupon").value !== "")
+                if(document.getElementById("coupon").value !== "" && coupons[document.getElementById("coupon").value] != null)
                 {
                     var node = document.createElement("LI");
                     var textnode = document.createTextNode("Coupon: " + coupons[document.getElementById("coupon").value].name);
@@ -98,10 +99,28 @@
             }
         });
 
+        $("#clear").click(function(){
+            var url = "/cart/clear?id=" + parseInt(custid);
+            $.ajax({
+                url: url,
+                type: "PUT",
+                success: function () {
+                    alert("Cart has been cleared.");
+                }
+            });
+
+            while(document.getElementById("list").firstChild)
+            {
+                document.getElementById("list").removeChild(document.getElementById("list").firstChild);
+            }
+            document.getElementById("total").innerHTML = "Cart is empty";
+            customer[custid].cart.length = 0;
+        });
+
         $("#checkout").click(function(){
             var url = "/cart/checkout?id=" + parseInt(custid) + "&method=" + method + "&cId=";
 
-            if(document.getElementById("coupon").value !== ""){
+            if(document.getElementById("coupon").value !== "" && coupons[document.getElementById("coupon").value] != null){
                 url += parseInt(document.getElementById("coupon").value);
             }
             else{
@@ -120,6 +139,7 @@
                 document.getElementById("list").removeChild(document.getElementById("list").firstChild);
             }
             document.getElementById("total").innerHTML = "Cart is empty";
+            customer[custid].cart.length = 0;
         });
 
         $("#menu").click(function() {
