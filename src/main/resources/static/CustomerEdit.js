@@ -31,8 +31,8 @@ function removeCust(){
             console.log(result);
         }});
 }
-function updateCoupon(){
-    var id = $("#uCId").val();
+function updateCustomer(){
+    var id = $("#uCust").val();
     var name = $("#N").val();
     var Address = $("#A").val();
     var CC = $("#C").val();
