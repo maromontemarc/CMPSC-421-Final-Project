@@ -345,23 +345,23 @@ class RestaurantApplicationTests {
         assertEquals("Coupon already exists",cc.addCoupon(r));
     }
 
-    @Test
-    void testCouponList()
-    {
-        CouponController cc = new CouponController();
-        Collection<Coupon> coupon = cc.getCoupons();
-        for(int i = 0; i < coupons.size(); i++)
-        {
-            if(!coupon.contains(coupons.get(i)))
-            {
-                System.out.println("Error: doesn't contain coupon " + coupons.get(i).name );
-            }
-            else
-            {
-                System.out.println("Contains: " + coupons.get(i).name );
-            }
-        }
-    }
+  //  @Test
+//    void testCouponList()
+//    {
+//        CouponController cc = new CouponController();
+//        Collection<Coupon> coupon = cc.getCoupons();
+//        for(int i = 0; i < coupons.size(); i++)
+//        {
+//            if(!coupon.contains(coupons.get(i)))
+//            {
+//                System.out.println("Error: doesn't contain coupon " + coupons.get(i).name );
+//            }
+//            else
+//            {
+//                System.out.println("Contains: " + coupons.get(i).name );
+//            }
+//        }
+//    }
 
     // CartController tests
     //
