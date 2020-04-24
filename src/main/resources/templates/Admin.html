@@ -43,31 +43,50 @@
 <body>
 
 <script>
-    function couponButton() {
-        document.getElementById("afterFunction").value =
-            document.getElementById("couponArea").value;
-    }
-</script>
-<script>
     function menuButton(){
         document.getElementById("afterMenuFunction").value =
             document.getElementById("menuArea").value
     }
 </script>
 
-
+<script type="text/javascript" th:src="@{/CreateCoupon.js}"></script>
+<script type="text/javascript" th:src="@{/DeleteCoupon.js}"></script>
+<script type="text/javascript" th:src="@{/ListAllCoupons.js}"></script>
+<script type="text/javascript" th:src="@{/UpdateCoupon.js}"></script>
 <div>
-    <h1>Create New Coupon</h1>
+    <h1>Coupons</h1>
+
+    <button id="listAllCouponsButton" onclick="listAllCoupons()">Show all</button>
+    <label id="showAllCouponLabel">Coupons: </label>
+
+    <br>
+
     <label>Coupon Code: </label>
-    <textarea id="couponArea">Enter Coupon code here</textarea>
-    <button onclick="couponButton()">Finalize Coupon</button>
-    <textarea id="afterFunction"></textarea>
+    <input id="coupName" type="text" placeholder="Enter Coupon code here">
+    <input id = "coupValue" type="number" placeholder="Enter Percentage off (5 = 5% off)">
+    <button id="couponButton" onclick="createCoupon()">Finalize Coupon</button>
+
+    <br>
+
+    <label>Delete Coupon Code</label>
+    <input id = "dcId" type="dcnumber" placeholder="Id" name="dcID" required>
+    <button id="deleteCouponButton" onclick="deleteCoupon()">Delete Coupon</button>
+
+    <br>
+
+    <label>Update Coupon Code</label>
+    <input id = "ucId" type="number" placeholder="Id" name="ucID" required>
+    <input id="coupCode" type="text" placeholder="Enter Updated Coupon code here" name="upCid" required>
+    <input id = "coupValueNew" type="number" placeholder="Enter Updated Coupon Value" name="upCvalId" required>
+    <button id="updateCouponButton" onclick="updateCoupon()">Update Coupon</button>
+
 </div>
 
 <div>
     <h1>Create New Menu Item</h1>
     <label>Menu Item: </label>
     <textarea id="menuArea">Enter Menu Item here</textarea>
+
     <button onclick="menuButton()">Finalize Menu item</button>
     <textarea id="afterMenuFunction"></textarea>
 </div>

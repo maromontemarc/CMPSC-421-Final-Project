@@ -1,5 +1,6 @@
 package psu.edu.restaurant;
 
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -7,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 import java.util.HashMap;
 
-@Controller
+@RestController
 public class CouponController {
     static public HashMap<Integer, Coupon> coupons = new HashMap<>();
     private int couponId = 0;
@@ -25,9 +26,9 @@ public class CouponController {
     }
 
     @GetMapping("/couponlist")
-    public Collection<Coupon> getCoupons()
+    public HashMap<Integer, Coupon> getCoupons()
     {
-        return coupons.values();
+        return coupons;
     }
 
     @GetMapping("/couponbyid")
@@ -43,7 +44,7 @@ public class CouponController {
         }
     }
 
-    @PostMapping("/couponlist/add")
+    @RequestMapping(value= "/couponlist/add", method = RequestMethod.POST, consumes= MediaType.APPLICATION_JSON_VALUE)
     public String addCoupon(@RequestBody Coupon item)
     {
         if(coupons.containsValue(item)) {
@@ -74,7 +75,8 @@ public class CouponController {
         }
     }
 
-    @PutMapping("/couponlist/update")
+    //@PutMapping("/couponlist/update")
+    @RequestMapping(value= "/couponlist/update", method = RequestMethod.PUT, consumes= MediaType.APPLICATION_JSON_VALUE)
     public String updateCoupon(@RequestParam(name = "id") int id, @RequestBody Coupon name) {
         if (coupons.containsKey(id)) {
             coupons.remove(id);
