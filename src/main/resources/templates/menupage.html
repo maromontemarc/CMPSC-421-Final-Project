@@ -30,23 +30,27 @@ var i=0;
             node.appendChild(textnode);
             document.getElementById("list").appendChild(node);
             i++;
-            $("#butn").append("<button id = 'additem"+i+"' class= \"btn btn-2 btn-sep icon-cart\" >Add 1 to cart</button>")
+            $("#butn").append("<li><button id = 'additem"+i+"' class= \"btn btn-2 btn-sep icon-cart\" >Add 1 to cart</button></li>")
         }
     });
 
 </script>
+
 <section>
-    <div style="float: left; padding-left: 100px;">
+    <div style="float: left; padding-left: 700px;">
 <ol id = "list" class = "listol">
 
 </ol>
 </div>
 </section>
-<section id = "buttonsctn">
+<section>
+<div style="float:right;padding-right: 700px;">
 <ol id = "butn" class = "butnol">
-
 </ol>
+
+</div>
 </section>
+
 
 <section class = "Checkout Button">
     <div class = "checkout">
@@ -55,7 +59,6 @@ var i=0;
     </div>
 </section>
 
-</section>
 
 <script>
 

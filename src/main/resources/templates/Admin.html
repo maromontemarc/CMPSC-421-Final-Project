@@ -218,7 +218,7 @@ function getupdateitemstring()
             data:getadditemstring(),
             contentType:'application/json',
             success: function () {
-                return alert("Added item to cart ");
+                return alert("Added item to menu ");
             }
 
         });
@@ -234,7 +234,7 @@ function getupdateitemstring()
             data:{id:$("#delmenuid").val()},
 
             success: function () {
-                return alert("deleted item from cart ");
+                return alert("deleted item from menu ");
             }
 
         });
@@ -251,7 +251,7 @@ $("#updateitem").click(function () {
         data:getupdateitemstring(),
         contentType:'application/json',
         success: function () {
-            return alert("Added item to cart ");
+            return alert("Updated Menu Item ");
         }
 
     });

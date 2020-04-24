@@ -1,16 +1,27 @@
 
-body
+html,body
 {
-    background-color: grey;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
+    background-color:grey;
 }
 
 .listol{
-list-style-type:decimal;
-    font-size: 50px;
-    text-align: left;
+    list-style-type:decimal;
+    font-size: 20px;
+
     font-family: "Berlin Sans FB" ;
-    line-height:2.2;
+    line-height:2.5;
 }
+.butnol
+{
+    font-size: 17px;
+
+}
+
 .title1{
 text-align: center;
 font-weight:900;
@@ -19,12 +30,11 @@ font-weight:900;
 
 
 }
-.butnol
-{
-    font-size: 49px;
-    mso-vertical-align: right;
-}
 
+
+.checkout {
+text-align:center;
+}
 
 .btn {
     border: none;
@@ -33,7 +43,7 @@ font-weight:900;
     color: inherit;
     background: none;
     cursor: pointer;
-    padding: 8px 30px;
+    padding: 2px 15px;
     display: inline-block;
     margin: 4px 9px;
     text-transform: uppercase;
@@ -63,7 +73,7 @@ font-weight:900;
     font-weight: normal;
     font-variant: normal;
     text-transform: none;
-    line-height: 4;
+    line-height: 1;
     position: relative;
     -webkit-font-smoothing: antialiased;
 }
@@ -71,7 +81,7 @@ font-weight:900;
 
 /* Icon separator */
 .btn-sep {
-    padding: 20px 40px 25px 100px;
+    padding: 10px 20px 15px 60px;
 }
 
 .btn-sep:before {
@@ -97,8 +107,8 @@ font-weight:900;
     height: 100%;
     left: 0;
     top: 0;
-    line-height: 1;
-    font-size: 140%;
+    line-height: 2;
+    font-size: 95%;
     width: 60px;
 }
 .icon-cart:before {
