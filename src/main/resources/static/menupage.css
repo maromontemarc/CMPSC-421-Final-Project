@@ -4,11 +4,12 @@ body
     background-color: grey;
 }
 
-ol{
+.listol{
 list-style-type:decimal;
     font-size: 50px;
-    text-align: center;
+    text-align: left;
     font-family: "Berlin Sans FB" ;
+    line-height:2.2;
 }
 .title1{
 text-align: center;
@@ -18,40 +19,12 @@ font-weight:900;
 
 
 }
-.sectionth{
-    text-align: center;
-    font-family: "Berlin Sans FB" ;
-    color: white;
-}
-.sectionBurger{
-    text-align: center;
-    font-family: "Berlin Sans FB" ;
-    color: white;
+.butnol
+{
+    font-size: 49px;
+    mso-vertical-align: right;
 }
 
-.sectionCheeseBurger{
-    text-align: center;
-    font-family: "Berlin Sans FB";
-    color: white;
-}
-
-.sectionsteak{
-    text-align: center;
-    font-family: "Berlin Sans FB";
-    color: white;
-}
-
-.sectionPizza{
-    text-align: center;
-    font-family: "Berlin Sans FB";
-    color: white;
-}
-
-.sectionGChicken{
-    text-align: center;
-    font-family: "Berlin Sans FB";
-    color: white;
-}
 
 .btn {
     border: none;
@@ -90,7 +63,7 @@ font-weight:900;
     font-weight: normal;
     font-variant: normal;
     text-transform: none;
-    line-height: 1;
+    line-height: 4;
     position: relative;
     -webkit-font-smoothing: antialiased;
 }
@@ -124,7 +97,7 @@ font-weight:900;
     height: 100%;
     left: 0;
     top: 0;
-    line-height: 3;
+    line-height: 1;
     font-size: 140%;
     width: 60px;
 }

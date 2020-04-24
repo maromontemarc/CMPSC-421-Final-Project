@@ -14,7 +14,7 @@ function createCoupon() {
     $('#couponButton').click(function () {
         $.ajax({
             method: 'POST',
-            url: 'https://localhost:8081/couponlist/add',
+            url: 'https://localhost:8080/couponlist/add',
             contentType: 'application/json',
             data: JSON.stringify({name: name, value: parseInt(value) / 100}),
 
