@@ -5,6 +5,7 @@ body
 }
 
 ol{
+list-style-type:decimal;
     font-size: 50px;
     text-align: center;
     font-family: "Berlin Sans FB" ;
