@@ -11,7 +11,8 @@
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <style>
         h1 {
-            text-align: left;
+
+            text-align: center;
             background-color: #808080;
             border-style: double;
             border: 3px solid black;
@@ -72,13 +73,50 @@
     <textarea id="afterMenuFunction"></textarea>
 </div>
 
+
 <div>
-    <h1>Create New Customer</h1>
-    <label>Customer</label>
-    <textarea></textarea>
-    <button>Customer Button</button>
+    <h2 id = "cTitle">Customer Options: </h2>
+        <div>
+            <h1>View Customer List </h1>
+            <button id = "viewCusts" onclick="openList()">View</button>
+            <label id = "customers">Customers:</label>
+
+        </div>
+        <div>
+            <h1>Delete Customer </h1>
+            <label><b>Id of Customer:</b></label>
+            <input id = "cId" type="number" placeholder="Id" name="cID" required>
+            <button id = "Delete" onclick="removeCust()">Delete</button>
+        </div>
+
+    <div>
+        <h1>Update Customer </h1>
+        <label><b>Id of Customer:</b></label>
+        <input id = "uCId" type="number" placeholder="Id" name="cID" required>
+       <br>
+        <label id = "Name"><b>Name</b></label>
+        <input id ="N" type="text" placeholder="Enter Name" name="Name" required>
+
+        <label id = "Address"><b>Address</b></label>
+        <input id ="A" type="text" placeholder="Enter Address" name="Address" required>
+
+        <label id = "CC"><b>Credit Card Number</b></label>
+        <input id ="C" type="text" placeholder="Credit Card Number" name="CC" required>
+        <button id = "Update" onclick="updateCoupon()">update</button>
+    </div>
+
+    <style>
+        #cTitle{
+            text-align: left;
+            background-color: green;
+            border-style: double;
+            font-size: 40px;
+            border: 3px solid black;
+        }
+    </style>
 </div>
 
 </body>
+<script type="text/javascript" th:src="@{/CustomerEdit.js}"></script>
 
 </html>

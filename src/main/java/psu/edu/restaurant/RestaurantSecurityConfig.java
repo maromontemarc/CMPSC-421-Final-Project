@@ -17,8 +17,9 @@ public class RestaurantSecurityConfig extends WebSecurityConfigurerAdapter{
                 .withUser("admin").password("{noop}admin").roles("ADMIN");
     }
     @Override
-    protected void configure(HttpSecurity http) throws Exception{
+    protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic()
+
                 .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.DELETE, "/cust/delete").hasRole("ADMIN")
@@ -34,4 +35,8 @@ public class RestaurantSecurityConfig extends WebSecurityConfigurerAdapter{
                 .csrf().disable()
                 .formLogin().disable();
     }
-}
+
+
+
+    }
+

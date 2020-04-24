@@ -60,9 +60,9 @@ public class CustomerController
     }
 
     @GetMapping("/cust/list")
-    public Collection<CustomerDTO> getCustomerList()
+    public HashMap<Integer, CustomerDTO> getCustomerList()
     {
-        return custDTOH.values();
+        return custDTOH;
     }
 
     @RequestMapping(value = "/cust/create", method = RequestMethod.POST,  consumes= MediaType.APPLICATION_JSON_VALUE)
@@ -80,11 +80,13 @@ public class CustomerController
             return ""+(custID-1);
         }
     }
-@GetMapping("/cust/id")
-public int lastcustid()
-{
-    return custID-1;
-}
+
+    @GetMapping("/cust/id")
+    public int lastcustid()
+    {
+        return custID-1;
+    }
+
     @DeleteMapping("/cust/delete")
     public Collection<Customer> deleteCustomer(@RequestParam(name = "id") int id )
     {
@@ -100,7 +102,7 @@ public int lastcustid()
         }
     }
 
-    @PutMapping("/cust/update")
+    @RequestMapping(value = "/cust/update", method = RequestMethod.PUT,  consumes= MediaType.APPLICATION_JSON_VALUE)
     public Customer updateCustomer(@RequestParam(name = "id") int id, @RequestBody Customer cust)
     {
         if(custH.containsKey(id) && custDTOH.containsKey(id))

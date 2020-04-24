@@ -44,6 +44,11 @@ public class RestaurantController
         m.addAttribute("custH",custH);
         return "menupage";
     }
+
+    @RequestMapping(value = "/Admin", method = RequestMethod.GET)
+    public String Admin(){return "Admin";}
+
+
     @GetMapping("/Checkout")
     public String index(Model m) {
         m.addAttribute("custH", custH);
@@ -56,6 +61,7 @@ public class RestaurantController
     public String Home() {
         return "Home";
     }
+
     @GetMapping("/menubyid")
     public MenuItem getMenuById(@RequestParam(name = "id") int id)
     {

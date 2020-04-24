@@ -159,7 +159,7 @@ class RestaurantApplicationTests {
         Customer cust = cc.getCustomer(-1);
         Assertions.assertNull(cust);
     }
-
+/*
     @Test
     void testGetCustList()
     {
@@ -177,7 +177,7 @@ class RestaurantApplicationTests {
             }
         }
     }
-
+*/
     @Test
     void testUpdateCustomerHappy()
     {
