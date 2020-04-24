@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Menu</title>
+
     <link th:href="@{/menupage.css}" type="text/css" rel="stylesheet"/>
     <link th:href="@{/webjars/bulma/0.6.0/css/bulma.css}" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
@@ -18,70 +19,38 @@
     <h2>MENU</h2>
 </div>
 
-<section class="sectionsteak">
-        <div class="container">
-        <h1 class="title">Steak</h1>
-            <p>Cost: $12</p>
-            <img th:src="@{/steak.png}" alt="steak" height="400" width="400">
-            <p>Big Juicy 16oz Porterhouse, 2 6oz Sirloins, and a 12oz Ribeye
-           </p>
-            <p>
-                <button id = addsteak class = "btn btn-2 btn-sep icon-cart" >Add 1 to cart</button> </p>
-    </div>
+<script th:inline="javascript">
+    $(function(){
+
+        var menu = [[${menuH}]];
+var i=0;
+        while (menu[i]!=null) {
+            var node = document.createElement("LI");
+            var textnode = document.createTextNode(menu[i].item + "  $" + menu[i].price);
+            node.appendChild(textnode);
+            document.getElementById("list").appendChild(node);
+            i++
+        }
+    });
+
+</script>
+<section>
+<div>
+<ol id = "list">
+
+</ol>
+</div>
+</section>
+<section class = "buttonsctn">
+
+    <button id = addsteak class = "btn btn-2 btn-sep icon-cart" >Add 1 Steak to cart</button>
+    <button id = addHburger class = "btn btn-2 btn-sep icon-cart">Add 1 Hamburger to cart</button>
+    <button id = addCheeseburger class = "btn btn-2 btn-sep icon-cart">Add 1 Cheeseburger to cart</button>
+    <button id = addPizza class = "btn btn-2 btn-sep icon-cart">Add 1 Pizza to cart</button>
+    <button id = addChicken class = "btn btn-2 btn-sep icon-cart">Add 1 Grilled Chicken to cart</button>
 
 </section>
 
-
-<section class="sectionBurger">
-    <div class="container">
-        <h1 class="title">Burger</h1>
-        <p>Cost: $8</p>
-        <img th:src="@{/hamburger412.jpg}" alt="hburger" height="400" width="400">
-        <p>Big 6oz beef patty, no cheese, nice toasted bun, lettuce, tomato with a side of homemade fries
-        </p>
-        <p>
-            <button id = addHburger class = "btn btn-2 btn-sep icon-cart">Add 1 to cart</button> </p>
-    </div>
-
-</section>
-<section class="sectionCheeseBurger">
-    <div class="container" >
-        <h1 class="title">CheeseBurger</h1>
-        <p>Cost: $9</p>
-        <img th:src="@{/cheeseburger412.jpg}" alt="cburger" height="400" width="400">
-        <p>Big 6oz beef patty, cheddar cheese, nice toasted bun, lettuce, tomato, onions and pickles with a side of homemade fries
-        </p>
-        <p>
-            <button id = addCheeseburger class = "btn btn-2 btn-sep icon-cart">Add 1 to cart</button> </p>
-    </div>
-
-</section>
-<section class="sectionPizza">
-    <div class="container" >
-        <h1 class="title">Pizza</h1>
-        <p>Cost: $10</p>
-        <img  th:src="@{/pizza421.png}" alt="pizza" height="400" width="400">
-        <p>8 slices, thick crust with pepperoni
-        </p>
-        <p>
-            <button id = addPizza class = "btn btn-2 btn-sep icon-cart">Add 1 to cart</button> </p>
-    </div>
-
-</section>
-
-<section class="sectionGChicken">
-    <div class="container" >
-        <h1 class="title">Grilled Chicken</h1>
-        <p>Cost: $9</p>
-        <img th:src="@{/chicken421.jpg}" alt="chicken" height="400" width="400">
-        <p>4 pieces of grilled chicken on a fresh salad with avocado
-        </p>
-        <p>
-
-            <button id = addChicken class = "btn btn-2 btn-sep icon-cart">Add 1 to cart</button> </p>
-    </div>
-
-</section>
 <section class = "Checkout Button">
     <div class = "checkout">
 
@@ -89,20 +58,15 @@
     </div>
 </section>
 
-
-
+</section>
 
 <script>
 
 
-
-
-
-
-var custid;
-$.get("/cust/id", function(data){
-    custid=data;
-});
+    var custid;
+    $.get("/cust/id", function(data){
+        custid=data;
+    });
 
 
 

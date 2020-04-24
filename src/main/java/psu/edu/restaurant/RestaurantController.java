@@ -1,6 +1,8 @@
 package psu.edu.restaurant;
 import static psu.edu.restaurant.CouponController.coupons;
 import static psu.edu.restaurant.CustomerController.custH;
+
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +36,7 @@ public class RestaurantController
     }
 
     @GetMapping("/menu")
+    @ResponseBody
     public Collection<MenuItem> getMenu()
     {
         return menuH.values();
@@ -42,9 +45,15 @@ public class RestaurantController
     @RequestMapping(value = "/menupage", method = RequestMethod.GET)
     public String menupage(Model m) {
         m.addAttribute("custH",custH);
+        m.addAttribute("menuH",menuH);
         return "menupage";
     }
 
+    @RequestMapping(value = "/Admin", method = RequestMethod.GET)
+    public String Admin(Model m) {
+        m.addAttribute("MenuH",menuH);
+        return "Admin";
+    }
     @GetMapping("/Checkout")
     public String index(Model m) {
         m.addAttribute("custH", custH);
@@ -57,11 +66,8 @@ public class RestaurantController
     public String Home() {
         return "Home";
     }
-
-    @RequestMapping(value = "/Admin", method = RequestMethod.GET)
-    public String Admin(){return "Admin";}
-
     @GetMapping("/menubyid")
+    @ResponseBody
     public MenuItem getMenuById(@RequestParam(name = "id") int id)
     {
         if(menuH.containsKey(id))
@@ -75,6 +81,7 @@ public class RestaurantController
     }
 
     @PostMapping("/menu/add")
+    @ResponseBody
     public Collection<MenuItem> addMenu(@RequestBody MenuItem item)
     {
         if(!menuH.containsValue(item)){
@@ -87,6 +94,7 @@ public class RestaurantController
     }}
 
     @DeleteMapping("/menu/delete")
+    @ResponseBody
     public Collection<MenuItem> deleteMenu(@RequestParam(name = "id") int id)
     {
         if( menuH.containsKey(id))
@@ -101,6 +109,7 @@ public class RestaurantController
     }
 
     @PutMapping("/menu/update")
+    @ResponseBody
     public Collection<MenuItem> updateMenu(@RequestParam(name = "id") int id, @RequestBody MenuItem item)
     {
         if(menuH.containsKey(id))

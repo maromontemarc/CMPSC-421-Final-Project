@@ -31,6 +31,11 @@
         }
     </style>
     <style>
+        p {
+            text-align: left;
+        }
+        </style>
+    <style>
         button {
             margin-left: 10px;
             margin-bottom: 10px;
@@ -44,52 +49,48 @@
 <body>
 
 <script>
+    function couponButton() {
+        document.getElementById("afterFunction").value =
+            document.getElementById("couponArea").value;
+    }
+</script>
+<script>
     function menuButton(){
         document.getElementById("afterMenuFunction").value =
             document.getElementById("menuArea").value
     }
 </script>
 
-<script type="text/javascript" th:src="@{/CreateCoupon.js}"></script>
-<script type="text/javascript" th:src="@{/DeleteCoupon.js}"></script>
-<script type="text/javascript" th:src="@{/ListAllCoupons.js}"></script>
-<script type="text/javascript" th:src="@{/UpdateCoupon.js}"></script>
+
 <div>
-    <h1>Coupons</h1>
-
-    <button id="listAllCouponsButton" onclick="listAllCoupons()">Show all</button>
-    <label id="showAllCouponLabel">Coupons: </label>
-
-    <br>
-
+    <h1>Create New Coupon</h1>
     <label>Coupon Code: </label>
-    <input id="coupName" type="text" placeholder="Enter Coupon code here">
-    <input id = "coupValue" type="number" placeholder="Enter Percentage off (5 = 5% off)">
-    <button id="couponButton" onclick="createCoupon()">Finalize Coupon</button>
-
-    <br>
-
-    <label>Delete Coupon Code</label>
-    <input id = "dcId" type="dcnumber" placeholder="Id" name="dcID" required>
-    <button id="deleteCouponButton" onclick="deleteCoupon()">Delete Coupon</button>
-
-    <br>
-
-    <label>Update Coupon Code</label>
-    <input id = "ucId" type="number" placeholder="Id" name="ucID" required>
-    <input id="coupCode" type="text" placeholder="Enter Updated Coupon code here" name="upCid" required>
-    <input id = "coupValueNew" type="number" placeholder="Enter Updated Coupon Value" name="upCvalId" required>
-    <button id="updateCouponButton" onclick="updateCoupon()">Update Coupon</button>
-
+    <textarea id="couponArea">Enter Coupon code here</textarea>
+    <button onclick="couponButton()">Finalize Coupon</button>
+    <textarea id="afterFunction"></textarea>
 </div>
 
 <div>
     <h1>Create New Menu Item</h1>
     <label>Menu Item: </label>
-    <textarea id="menuArea">Enter Menu Item here</textarea>
-
-    <button onclick="menuButton()">Finalize Menu item</button>
+    <p>Name:<input type=text id="itemname"> </p>
+    <p>Cost:<input type=number id="itemcost"> </p>
+    <button id = "Additem">Finalize Menu item</button>
     <textarea id="afterMenuFunction"></textarea>
+</div>
+<div>
+    <h1>Delete Menu Item</h1>
+    <p>MenuID:<input  id="delmenuid" type=number> </p>
+    <button id = "deleteitem">Finalize Menu item</button>
+
+</div>
+<div>
+    <h1>Update Menu Item</h1>
+    <p>MenuID:<input type=number id="updatemenuid"> </p>
+    <p>New Menu Name:<input type=text id="updatemenuname"> </p>
+    <p>New menu cost:<input type=number id="updatemenucost"> </p>
+    <button id = "updateitem">Finalize Menu item</button>
+
 </div>
 
 
@@ -134,6 +135,87 @@
         }
     </style>
 </div>
+
+<script>
+var delid = $("#delmenuid").val();
+ function getadditemstring()
+    {
+        var jsonStr = {
+
+                name: $("#itemname").val(),
+                cost:parseInt ($("#itemcost").val())
+
+    };
+        return JSON.stringify(jsonStr);
+    }
+
+function getupdateitemstring()
+{
+    var jsonStr = {
+        name: $("#updatemenuname").val(),
+        cost:parseInt ($("#updatemenucost").val())
+
+    };
+    return JSON.stringify(jsonStr);
+}
+
+
+    $("#Additem").click(function () {
+        console.log("json");
+
+        $.ajax({
+            type: 'POST',
+            url: 'https://localhost:8080/menu/add',
+
+            data:getadditemstring(),
+            contentType:'application/json',
+            success: function () {
+                return alert("Added item to cart ");
+            }
+
+        });
+        $(function() {
+            $("#buttonsctn").append("<button id = newitem class = \"btn btn-2 btn-sep icon-cart\" >Add 1 newitem to cart</button>")
+
+        });
+    });
+
+
+    $("#deleteitem").click(function () {
+        console.log(delid);
+        $.ajax({
+            method: "DELETE",
+            url: 'https://localhost:8080/menu/delete',
+            data:{id:$("#delmenuid").val()},
+
+            success: function () {
+                return alert("deleted item from cart ");
+            }
+
+        });
+
+    });
+$("#updateitem").click(function () {
+    var id = $('#updatemenuid').val();
+    console.log("json");
+    $.ajax({
+        type: 'PUT',
+        url: 'https://localhost:8080/menu/update?id='+id,
+        username: 'admin',
+        password: 'admin',
+        data:getupdateitemstring(),
+        contentType:'application/json',
+        success: function () {
+            return alert("Added item to cart ");
+        }
+
+    });
+
+});
+
+</script>
+
+
 
 </body>
 <script type="text/javascript" th:src="@{/CustomerEdit.js}"></script>
