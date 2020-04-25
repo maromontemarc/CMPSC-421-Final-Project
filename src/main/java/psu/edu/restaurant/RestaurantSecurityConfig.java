@@ -19,9 +19,9 @@ public class RestaurantSecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic()
-
-                //.and()
-                //.authorizeRequests()
+               // .and()
+               // .authorizeRequests()
+                //.antMatchers(HttpMethod.GET, "/Admin").hasRole("ADMIN")
                 //.antMatchers(HttpMethod.DELETE, "/cust/delete").hasRole("ADMIN")
                 //.antMatchers(HttpMethod.DELETE, "/couponlist/delete").hasRole("ADMIN")
                 //.antMatchers(HttpMethod.PUT, "/couponlist/update").hasRole("ADMIN")

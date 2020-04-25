@@ -94,6 +94,18 @@ public class CustomerController
         {
             custH.remove(id);
             custDTOH.remove(id);
+            int x=id;
+            while(x<custID) {
+                Customer a=custH.get(x+1);
+                CustomerDTO a1=custDTOH.get(x+1);
+                custH.put(x,a);
+                custDTOH.put(x,a1);
+                x++;
+
+
+            }
+            custID--;
+
             return custH.values();
         }
         else

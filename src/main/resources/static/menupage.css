@@ -16,18 +16,48 @@ html,body
     font-family: "Berlin Sans FB" ;
     line-height:2.5;
 }
-.butnol
+.butnol div
 {
     font-family: "Berlin Sans FB" ;
     font-size: 17px;
+    border: 3px solid #ddd;
+    border-radius: 4px;
+    margin:15px;
 
 }
+label p{
+    color:lawngreen;
+}
+div label{
+    color:orange;
+}
+div img{
 
+    width: 275px;
+    height: 200px;
+
+}
+#all{
+
+    flex-direction: row;
+    justify-content: center;
+    align-content:space-around;
+    flex-direction: row;
+}
+#butn{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap:wrap;
+
+}
 .title1{
 text-align: center;
 font-weight:900;
     font-family: "Bauhaus 93";
     font-size: 200px;
+   text-decoration: underline;
+    color:sandybrown;
 
 
 }

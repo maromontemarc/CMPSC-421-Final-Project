@@ -67,6 +67,17 @@ public class CouponController {
         if( coupons.containsKey(id))
         {
             coupons.remove(id);
+            int x=id;
+            while(x<couponId) {
+                Coupon a=coupons.get(x+1);
+
+                coupons.put(x,a);
+
+                x++;
+
+
+            }
+            couponId--;
             return coupons.values();
         }
         else

@@ -101,6 +101,11 @@
 
 <div><h2 id = "mTitle">Menu Options: </h2>
 <div>
+    <h1>Menu List</h1>
+    <button id="listmenu" onclick="getmenu()">Show all</button>
+    <label id="menu">Menu: </label>
+
+
     <h1>Create New Menu Item</h1>
     <label>Menu Item: </label>
     <p>Name:<input type=text id="itemname"> </p>
@@ -120,7 +125,8 @@
     <p>MenuID:<input type=number id="updatemenuid"> </p>
     <p>New Menu Name:<input type=text id="updatemenuname"> </p>
     <p>New menu cost:<input type=number id="updatemenucost"> </p>
-    <button id = "updateitem">Finalize Menu item</button>
+    <p>Picture URL:<input type=url id="pictureupdate"> </p>
+    <button id = "updateitem" onclick= "updateMItem()">Finalize Menu item</button>
 
 </div>
 </div>
@@ -208,6 +214,51 @@ function getupdateitemstring()
     return JSON.stringify(jsonStr);
 }
 
+function addMItem(){
+
+    $("#Additem").click(function () {
+        console.log("json");
+var   img = $("#picture").val();
+
+        $.ajax({
+            type: 'POST',
+            url: 'https://localhost:8080/menu/images/add',
+
+            data:img,
+            contentType:'application/json',
+            success: function () {
+
+            }
+
+        });
+
+    });
+
+
+}
+function updateMItem() {
+
+    $("#updateitem").click(function () {
+        var id = $('#updatemenuid').val();
+        var newimg = $("#pictureupdate").val();
+        console.log("json");
+
+        $.ajax({
+            type: 'PUT',
+            url: 'https://localhost:8080/menu/images/update?id='+id,
+            username: 'admin',
+            password: 'admin',
+            data:newimg,
+            contentType:'application/json',
+            success: function () {
+                return alert("Updated Menu Item ");
+            }
+
+        });
+
+    });
+
+}
 
     $("#Additem").click(function () {
         console.log("json");
@@ -234,7 +285,8 @@ function getupdateitemstring()
             url: 'https://localhost:8080/menu/delete',
             data:{id:$("#delmenuid").val()},
 
-            success: function () {
+            success: function (data) {
+                console.log(data);
                 return alert("deleted item from menu ");
             }
 
@@ -265,5 +317,7 @@ $("#updateitem").click(function () {
 
 </body>
 <script type="text/javascript" th:src="@{/CustomerEdit.js}"></script>
+<script type="text/javascript" th:src="@{/getimages.js}"></script>
+<script type="text/javascript" th:src="@{/getmenu.js}"></script>
 
 </html>

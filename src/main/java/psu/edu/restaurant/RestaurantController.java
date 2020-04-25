@@ -16,10 +16,17 @@ import java.util.Map;
 public class RestaurantController
 {
     static public HashMap<Integer, MenuItem> menuH = new HashMap<>();
+    static public HashMap<Integer,String> images = new HashMap<>();
     private int menuID = 0;
-
+    private int imgID =0;
     public RestaurantController()
     {
+        images.put(imgID++,"steak.png");
+        images.put(imgID++,"hamburger412.jpg");
+        images.put(imgID++,"cheeseburger412.jpg");
+        images.put(imgID++,"pizza421.png");
+        images.put(imgID++,"chicken421.jpg");
+
         MenuItem steak = new MenuItem("Steak", 12);
         MenuItem burger = new MenuItem("Burger", 8);
         MenuItem cheeseBurger = new MenuItem("Cheeseburger", 9);
@@ -42,10 +49,40 @@ public class RestaurantController
         return menuH;
     }
 
+    @GetMapping("/menu/images")
+    @ResponseBody
+    public HashMap<Integer,String> getImages()
+    {
+        return images;
+    }
+
+    @PostMapping("/menu/images/add")
+    @ResponseBody
+    public String addImage(@RequestBody String image) {
+        images.put(imgID++,image);
+        return images.get(imgID);
+    }
+
+    @PutMapping("/menu/images/update")
+    @ResponseBody
+    public String updateImage(@RequestParam(name = "id") int id, @RequestBody String image)
+    {
+        if(images.containsKey(id))
+        {
+            images.remove(id);
+            images.put(id, image);
+            return images.get(id);
+        }
+        else
+        {
+            return null;
+        }
+    }
     @RequestMapping(value = "/menupage", method = RequestMethod.GET)
     public String menupage(Model m) {
         m.addAttribute("custH",custH);
         m.addAttribute("menuH",menuH);
+        m.addAttribute("images",images);
         return "menupage";
     }
 
@@ -95,12 +132,27 @@ public class RestaurantController
 
     @DeleteMapping("/menu/delete")
     @ResponseBody
-    public Collection<MenuItem> deleteMenu(@RequestParam(name = "id") int id)
+    public HashMap<Integer,MenuItem> deleteMenu(@RequestParam(name = "id") int id)
     {
         if( menuH.containsKey(id))
         {
+            images.remove(id);
             menuH.remove(id);
-            return menuH.values();
+
+            int x=id;
+            while(x<menuID) {
+                MenuItem a=menuH.get(x+1);
+                String img = images.get(x+1);
+                images.put(x,img);
+                menuH.put(x,a);
+                x++;
+
+
+            }
+            imgID--;
+            menuID--;
+            return menuH;
+
         }
         else
         {

@@ -1,9 +1,10 @@
 function getmenu(){
     var menulist;
-    $("#menu").text("");
+
 
     $.get("/menu", function(data){
         var i =0;
+        $("#menu").text("");
         console.log($("#menu").val());
         while(data[i] != null) {
 

@@ -12,31 +12,36 @@
     <link rel="stylesheet" th:href="@{/webjars/font-awesome/5.12.0/css/font-awesome.min.css}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script type="text/javascript" th:src="@{/getimages.js}"></script>
 </head>
 <body>
 
 <div class = title1>
     <h2>MENU</h2>
 </div>
-<div style = "float:right; padding-right:150px;" id = imgex>
 
-
-    <img th:src="@{/cheeseburger412.jpg}" alt="cburger" height="300" width="300">
-    <br>
-    <img th:src="@{/steak.png}" alt="steak" height="300" width="300">
-</div>
 <script th:inline="javascript">
+
+
     $(function(){
 
         var menu = [[${menuH}]];
+        var imgs = [[${images}]];
 var i=0;
         while (menu[i]!=null) {
-            var node = document.createElement("LI");
-            var textnode = document.createTextNode(menu[i].item + "  $" + menu[i].price);
-            node.appendChild(textnode);
-            document.getElementById("list").appendChild(node);
+           // var node = document.createElement("LI");
+            //var textnode = document.createTextNode(menu[i].item + "  $" + menu[i].price);
+          //  node.appendChild(textnode);
+            //document.getElementById("list").appendChild(node);
 
-            $("#butn").append("<li><button id ="+i+" class= \"btn btn-2 btn-sep icon-cart\">Add 1 "+ menu[i].item + " to cart</button></li>");
+            var image_url = imgs[i];
+            var images_div = "<img id = "+i+" src=\""+image_url+ "\">";
+            $("#butn").append("<div id = "+'d'+i+"></div>");
+            $("#"+'d'+i+"").append("<label style='font-size: 35px;font-weight: bold;'>Name: "+menu[i].item+"<br>"+"<p>"+"Cost: $"+menu[i].price+"</p></label><br>")
+            $("#"+'d'+i+"").append(images_div);
+            $("#"+'d'+i+"").append("<ol><button id ="+i+" class= \"btn btn-2 btn-sep icon-cart\">Add 1 to cart </button></ol>");
+            $("#"+'d'+i+"").append("<br>");
+
             var str = '#' + i;
 
             console.log(str);
@@ -66,17 +71,7 @@ $(document).on('click','.btn',function () {
 });
 
 </script>
-<section>
-    <div style = "float:left; padding-left:100px;" id = imgex>
 
-
-        <img th:src="@{/hamburger412.jpg}" alt="hburger" height="300" width="300">
-        <br>
-        <img  th:src="@{/pizza421.png}" alt="pizza" height="300" width="300">
-
-
-    </div>
-<section>
     <div style="float: left; padding-left: 250px;">
 <ol id = "list" class = "listol">
 
@@ -84,7 +79,7 @@ $(document).on('click','.btn',function () {
 </div>
 </section>
 <section>
-<div style="float:right;padding-right: 200px;">
+<div id = "all">
 <ol id = "butn" class = "butnol">
 </ol>
 
@@ -93,7 +88,7 @@ $(document).on('click','.btn',function () {
 
 
 <section class = "Checkout Button">
-    <div style="float:bottom; padding-top:300px; padding-left:1000px;" class = "checkout">
+    <div style="float:bottom;  padding-left:800px;" class = "checkout">
 
         <button onclick="location.href='/Checkout'" id = checkout class = "btn btn-2 btn-sep icon-send">Checkout</button>
     </div>
