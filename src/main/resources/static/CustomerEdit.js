@@ -23,6 +23,7 @@ function removeCust(){
         method: "Delete",
         url: "/cust/delete",
         data: {
+
                 id:  id
          }
          ,

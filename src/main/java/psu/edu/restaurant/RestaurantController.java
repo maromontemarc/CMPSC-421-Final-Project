@@ -37,9 +37,9 @@ public class RestaurantController
 
     @GetMapping("/menu")
     @ResponseBody
-    public Collection<MenuItem> getMenu()
+    public HashMap<Integer, MenuItem> getMenu()
     {
-        return menuH.values();
+        return menuH;
     }
 
     @RequestMapping(value = "/menupage", method = RequestMethod.GET)

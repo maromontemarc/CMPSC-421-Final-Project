@@ -20,7 +20,7 @@ class RestaurantApplicationTests {
 
     // RestaurantController tests
     //
-
+/*
     @Test
     void testGetMenu()
     {
@@ -38,7 +38,7 @@ class RestaurantApplicationTests {
             }
         }
     }
-
+*/
     @Test
     void testGetMenuByIDHappy()
     {
@@ -159,6 +159,7 @@ class RestaurantApplicationTests {
         Customer cust = cc.getCustomer(-1);
         Assertions.assertNull(cust);
     }
+
 /*
     @Test
     void testGetCustList()
@@ -178,6 +179,7 @@ class RestaurantApplicationTests {
         }
     }
 */
+
     @Test
     void testUpdateCustomerHappy()
     {
@@ -186,6 +188,7 @@ class RestaurantApplicationTests {
         cc.updateCustomer(1,John );
         assertEquals(John,cc.getCustomer(1));
     }
+
     @Test
     void testUpdateCustomerHappy2()
     {
@@ -194,6 +197,7 @@ class RestaurantApplicationTests {
         cc.updateCustomer(2,John );
         assertEquals(John,cc.getCustomer(2));
     }
+
     @Test
     void testUpdateCustomerUnhappy()
     {
@@ -235,6 +239,7 @@ class RestaurantApplicationTests {
 
         assertEquals(John.name, cc.createCustomer(John));
     }
+
     @Test
     void testCreateCustomerHappy2()
     {
@@ -244,6 +249,7 @@ class RestaurantApplicationTests {
 
         assertEquals(Jeff.name, cc.createCustomer(Jeff));
     }
+
     @Test
     void testCreateCustomerUnhappy()
     {

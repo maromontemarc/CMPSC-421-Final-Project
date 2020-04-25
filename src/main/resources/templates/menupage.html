@@ -20,20 +20,50 @@
 </div>
 
 <script th:inline="javascript">
+
+
+var menu = [[${menuH}]];
     $(function(){
 
-        var menu = [[${menuH}]];
-var i=0;
+
+        var i=0;
         while (menu[i]!=null) {
             var node = document.createElement("LI");
             var textnode = document.createTextNode(menu[i].item + "  $" + menu[i].price);
             node.appendChild(textnode);
             document.getElementById("list").appendChild(node);
+
+            $("#butn").append("<li><button id ="+i+" class= \"btn btn-2 btn-sep icon-cart\">Add 1 "+ menu[i].item + " to cart</button></li>");
+            var str = '#' + i;
+
+            console.log(str);
             i++;
-            $("#butn").append("<li><button id = 'additem"+i+"' class= \"btn btn-2 btn-sep icon-cart\" >Add 1 to cart</button></li>")
+
         }
     });
 
+var custid;
+$.get("/cust/id", function(data){
+    custid=data;
+});
+
+
+$(document).on('click','.btn',function () {
+           var p= $(this).attr('id');
+        console.log(p);
+            $.ajax({
+                type: 'PUT',
+                url: 'https://localhost:8080/cart/add?item='+p +'&'+ 'id='+custid,
+
+
+                success: function (data) {
+                    return alert(menu[p].item);
+                }
+
+            });
+
+
+    });
 </script>
 
 <section>
@@ -47,7 +77,7 @@ var i=0;
 <div style="float:right;padding-right: 700px;">
 <ol id = "butn" class = "butnol">
 </ol>
-
+<img src="https://www.example.com/images/dinosaur.jpg%22%3E">
 </div>
 </section>
 
@@ -58,164 +88,6 @@ var i=0;
         <button onclick="location.href='/Checkout'" id = checkout class = "btn btn-2 btn-sep icon-send">Checkout</button>
     </div>
 </section>
-
-
-<script>
-
-
-    var custid;
-    $.get("/cust/id", function(data){
-        custid=data;
-    });
-
-
-
-
-    $(document).on('click','#additem1',function () {
-        console.log("1 Steak Added");
-        $.ajax({
-            type: 'PUT',
-            url: 'https://localhost:8080/cart/add?item=0&'+'id='+custid,
-
-            contentType:'application/json',
-            success: function () {
-                return alert("1 ");
-            }
-
-        });
-
-    });
-
-    $(document).on('click','#additem2',function () {
-        console.log("1Hamburger Added");
-        $.ajax({
-            type: 'PUT',
-            url: 'https://localhost:8080/cart/add?item=1&'+ 'id='+custid,
-            data: "item=1 & id=0",
-            contentType:'application/json',
-            success: function () {
-                return alert("Added  1 ");
-            }
-
-        });
-
-    });
-    $(document).on('click','#additem3',function() {
-        console.log("1 Cheeseburger Added");
-        $.ajax({
-            type: 'put',
-            url: 'https://localhost:8080/cart/add?item=2&'+'id='+custid,
-            data: "item=0 & id=0",
-            contentType:'application/json',
-            success: function() {
-                return alert("Added 1 ");
-            }
-
-        });
-
-    });
-    $(document).on('click','#additem4',function () {
-        console.log("1 pizza Added");
-        $.ajax({
-            type: 'put',
-            url: 'https://localhost:8080/cart/add?item=3&'+'id='+custid,
-            data: "item=0 & id=0",
-            contentType:'application/json',
-            success: function () {
-                return alert("Added 1 ");
-            }
-
-        });
-
-    });
-    $(document).on('click','#additem5',function () {
-        console.log("1 Grilled Chicken Added");
-        $.ajax({
-            type: 'put',
-            url: 'https://localhost:8080/cart/add?item=4&'+'id='+custid,
-            data: "item=0 & id=0",
-            contentType:'application/json',
-            success: function () {
-                return alert("Added 1 to cart ");
-            }
-
-        });
-
-    });
-
-
-    $(document).on('click','#additem6',function () {
-        console.log("1 Steak Added");
-        $.ajax({
-            type: 'PUT',
-            url: 'https://localhost:8080/cart/add?item=5&'+'id='+custid,
-
-            contentType:'application/json',
-            success: function () {
-                return alert("Added 1 ");
-            }
-
-        });
-
-    });
-
-    $(document).on('click','#additem7',function () {
-        console.log("1Hamburger Added");
-        $.ajax({
-            type: 'PUT',
-            url: 'https://localhost:8080/cart/add?item=6&'+ 'id='+custid,
-            data: "item=1 & id=0",
-            contentType:'application/json',
-            success: function () {
-                return alert("Added 1 ");
-            }
-
-        });
-
-    });
-    $(document).on('click','#additem8',function() {
-        console.log("1 Cheeseburger Added");
-        $.ajax({
-            type: 'put',
-            url: 'https://localhost:8080/cart/add?item=7&'+'id='+custid,
-            data: "item=0 & id=0",
-            contentType:'application/json',
-            success: function() {
-                return alert("Added 1 ");
-            }
-
-        });
-
-    });
-    $(document).on('click','#additem9',function () {
-        console.log("1 pizza Added");
-        $.ajax({
-            type: 'put',
-            url: 'https://localhost:8080/cart/add?item=8&'+'id='+custid,
-            data: "item=0 & id=0",
-            contentType:'application/json',
-            success: function () {
-                return alert("Added 1 ");
-            }
-
-        });
-
-    });
-    $(document).on('click','#additem10',function () {
-        console.log("1 Grilled Chicken Added");
-        $.ajax({
-            type: 'put',
-            url: 'https://localhost:8080/cart/add?item=9&'+'id='+custid,
-            data: "item=0 & id=0",
-            contentType:'application/json',
-            success: function () {
-                return alert("Added 1 ");
-            }
-
-        });
-
-    });
-</script>
 
 
 </body>

@@ -105,7 +105,8 @@
     <label>Menu Item: </label>
     <p>Name:<input type=text id="itemname"> </p>
     <p>Cost:<input type=number id="itemcost"> </p>
-    <button id = "Additem">Finalize Menu item</button>
+    <p>Picture URL:<input type=url id="picture"> </p>
+    <button id = "Additem" onclick="addMItem()">Finalize Menu item</button>
 
 </div>
 <div>
@@ -207,24 +208,27 @@ function getupdateitemstring()
     return JSON.stringify(jsonStr);
 }
 
+function addMItem() {
 
-    $("#Additem").click(function () {
-        console.log("json");
+    function setPic(){
+        var picUrl = $("#picture").val();
+        return picUrl;
+    }
 
         $.ajax({
             type: 'POST',
             url: 'https://localhost:8080/menu/add',
 
-            data:getadditemstring(),
-            contentType:'application/json',
+            data: getadditemstring(),
+            contentType: 'application/json',
             success: function () {
                 return alert("Added item to menu ");
             }
 
         });
 
-    });
 
+}
 
     $("#deleteitem").click(function () {
         console.log(delid);
