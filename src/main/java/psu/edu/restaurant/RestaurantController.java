@@ -36,8 +36,8 @@ public class RestaurantController
     }
 
     @GetMapping("/menu")
-    @ResponseBody
-    public HashMap<Integer, MenuItem> getMenu()
+@ResponseBody
+    public HashMap<Integer,MenuItem> getMenu()
     {
         return menuH;
     }

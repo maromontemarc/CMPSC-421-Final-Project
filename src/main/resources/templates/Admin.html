@@ -208,27 +208,24 @@ function getupdateitemstring()
     return JSON.stringify(jsonStr);
 }
 
-function addMItem() {
 
-    function setPic(){
-        var picUrl = $("#picture").val();
-        return picUrl;
-    }
+    $("#Additem").click(function () {
+        console.log("json");
 
         $.ajax({
             type: 'POST',
             url: 'https://localhost:8080/menu/add',
 
-            data: getadditemstring(),
-            contentType: 'application/json',
+            data:getadditemstring(),
+            contentType:'application/json',
             success: function () {
                 return alert("Added item to menu ");
             }
 
         });
 
+    });
 
-}
 
     $("#deleteitem").click(function () {
         console.log(delid);

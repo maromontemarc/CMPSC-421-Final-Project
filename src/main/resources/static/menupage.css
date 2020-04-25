@@ -18,6 +18,7 @@ html,body
 }
 .butnol
 {
+    font-family: "Berlin Sans FB" ;
     font-size: 17px;
 
 }
@@ -30,11 +31,12 @@ font-weight:900;
 
 
 }
+.imgex
+{
+    text-align:center;
 
-
-.checkout {
-text-align:center;
 }
+
 
 .btn {
     border: none;
