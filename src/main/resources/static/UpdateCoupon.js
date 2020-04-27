@@ -10,8 +10,6 @@ function updateCoupon(){
     var value = $('#coupValueNew').val()
 
 
-    $('#updateCouponButton').click(function () {
-
         var url = "/couponlist/update?id=" + id;
             $.ajax({
             url: url,
@@ -26,7 +24,5 @@ function updateCoupon(){
                 alert("Coupon Update failed");
             }
         })
-
-    })
 
 }

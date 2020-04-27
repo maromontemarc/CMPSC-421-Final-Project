@@ -8,8 +8,6 @@
 function deleteCoupon() {
     var id = $('#dcId').val();
 
-
-    $('#deleteCouponButton').click(function () {
         $.ajax({
             method: 'DELETE',
             url: '/couponlist/delete',
@@ -27,6 +25,5 @@ function deleteCoupon() {
         });
 
 
-    });
 
 }

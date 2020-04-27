@@ -10,8 +10,6 @@ function createCoupon() {
     var value = $('#coupValue').val();
 
 
-
-    $('#couponButton').click(function () {
         $.ajax({
             method: 'POST',
             url: 'https://localhost:8080/couponlist/add',
@@ -28,6 +26,6 @@ function createCoupon() {
         });
 
 
-    });
+
 
 }
